@@ -1,0 +1,150 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs,longtable,microtype,hyperref}
+\hypersetup{hidelinks}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlength{\emergencystretch}{3em}
+\title{Folio: Manuscript Assessment}
+\author{Jev-assisted review}
+\date{2026-09-19}
+\begin{document}
+\maketitle
+\section{Manuscript}
+Uncertainty-aware document classification
+\par File: \texttt{structured\_synthetic.pdf}
+\par Review ID: \texttt{580bc56f-f63a-4674-bbf9-2bdc5960ff8f}
+\par SHA-256: \texttt{9689e3628279d513255f5fde43256dc6}\allowbreak\texttt{ab6b74ffc24265803608aadd1ecc7451}
+Pages: 3. Review units: 8. Profile: research.
+\section{Overall assessment}
+Score: 80.6/100. Recommendation: Promising ; minor revisions.
+Review status: Complete. Mean model confidence: 50.8\%.
+\section{Method}
+Each passage is evaluated on four five-level Jev Score questions. Scores are mapped from [0,4] to [0,100]. Clarity contributes 20\%, rigor 35\%, evidence 30\%, and completeness 15\%. Long-section passage scores are weighted by character count. Section weights are fixed by role and divided within a role by word count. Mean confidence describes concentration of model outputs, not the probability that the paper is correct. Findings and suggestions below are rubric-derived templates, not generated expert explanations. Source excerpts are context, not verified rationales.
+\section{Section scores}
+\begin{longtable}{p{.44\textwidth}rrrr}
+\toprule Section & Pages & Score & Conf. & Weight \\ \midrule\endhead
+Abstract & 1--1 & 87.0 & 57\% & 5.0\% \\
+1 Introduction & 1--1 & 75.4 & 43\% & 10.0\% \\
+2 Related Work & 1--1 & 73.3 & 42\% & 10.0\% \\
+3 Methods & 2--2 & 86.3 & 62\% & 25.0\% \\
+4 Results & 2--2 & 76.9 & 44\% & 25.0\% \\
+5 Discussion and Limitations & 2--2 & 86.2 & 54\% & 12.0\% \\
+6 Conclusion & 2--2 & 85.2 & 57\% & 8.0\% \\
+References & 3--3 & 69.4 & 40\% & 5.0\% \\
+\bottomrule\end{longtable}
+\section{Detailed findings}
+\subsection{Abstract}
+\par\textbf{Clarity (87.0/100):} The argument is easy to follow with only minor ambiguity.
+\par\textbf{Rigor (86.5/100):} The reasoning is well justified with explicit assumptions and minor gaps.
+\par\textbf{Evidence (87.2/100):} Central claims have specific relevant support with small omissions.
+\par\textbf{Completeness (88.0/100):} The section's purpose is fully addressed with the details a critical reader needs.
+\begin{quote}\small We study whether explicit uncertainty reporting improves the interpretability of a small
+document-classification system. In this synthetic demonstration, a logistic regression baseline is
+compared with temperature-scaled predictions on a fixed, balanced collection of 600 generated
+abstracts. We report held-out accuracy and calibration error over five random seeds. Calibration
+improves while accuracy is unchanged within sampling variation. These illustrative results describe a
+controlled toy setting; they do not establish performance on real sch\end{quote}
+Passages evaluated: 1. Model: jev-1.13.0.
+\subsection{1 Introduction}
+\par\textbf{Clarity (86.8/100):} The argument is easy to follow with only minor ambiguity.
+\par\textbf{Rigor (88.5/100):} The reasoning is internally sound and its assumptions and inference boundaries are explicit.
+\par\textbf{Evidence (50.5/100):} Some relevant support is provided but a central claim remains insufficiently supported.
+\par Revision prompt: Connect each central claim to a specific result, derivation, or relevant citation.
+\par\textbf{Completeness (79.2/100):} The necessary details are present with only minor omissions.
+\begin{quote}\small Automated document triage often exposes a class label without the uncertainty behind it. Readers may
+mistake a confident prediction for a reliable one. Our research question is whether a simple
+post-processing calibration step can improve the match between prediction confidence and observed
+accuracy without changing the classifier. The contribution is a small, reproducible evaluation protocol
+separating training, calibration, and testing. This original synthetic manuscript is a software
+demonstration and is not a published scientific study.\end{quote}
+Passages evaluated: 1. Model: jev-1.13.0.
+\subsection{2 Related Work}
+\par\textbf{Clarity (82.5/100):} The argument is easy to follow with only minor ambiguity.
+\par\textbf{Rigor (80.8/100):} The reasoning is well justified with explicit assumptions and minor gaps.
+\par\textbf{Evidence (71.2/100):} Central claims have specific relevant support with small omissions.
+\par Revision prompt: Connect each central claim to a specific result, derivation, or relevant citation.
+\par\textbf{Completeness (47.8/100):} The main information is present but an important detail is missing.
+\par Revision prompt: Add the missing details a reader would need to assess this section independently.
+\begin{quote}\small Proper scoring rules formalize evaluation of probabilistic predictions [1]. Calibration methods adjust
+confidence estimates while preserving a predictor's ranking, with temperature scaling providing a simple
+example [2]. Our protocol uses these established ideas rather than claiming a new calibration algorithm.
+A broader comparison with isotonic regression would help establish whether the chosen baseline is
+appropriate; that comparison is left for future work.
+Folio / illustrative manuscript                                      1\end{quote}
+Passages evaluated: 1. Model: jev-1.13.0.
+\subsection{3 Methods}
+\par\textbf{Clarity (92.8/100):} Precise definitions and coherent organization make the meaning unambiguous.
+\par\textbf{Rigor (88.5/100):} The reasoning is internally sound and its assumptions and inference boundaries are explicit.
+\par\textbf{Evidence (85.5/100):} Central claims have specific relevant support with small omissions.
+\par\textbf{Completeness (74.2/100):} The necessary details are present with only minor omissions.
+\par Revision prompt: Add the missing details a reader would need to assess this section independently.
+\begin{quote}\small We construct 600 synthetic abstracts balanced across three topic classes. A fixed stratified split
+allocates 360 abstracts to training, 120 to calibration, and 120 to testing. A TF-IDF representation with
+unigrams and bigrams feeds a multinomial logistic regression with L2 regularization and C=1.
+Vocabulary construction uses training data only. Temperature is selected on the calibration split by
+minimizing negative log likelihood. The held-out test split is never used for model or temperature
+selection. We repeat the procedure for random seeds \end{quote}
+Passages evaluated: 1. Model: jev-1.13.0.
+\subsection{4 Results}
+\par\textbf{Clarity (93.2/100):} Precise definitions and coherent organization make the meaning unambiguous.
+\par\textbf{Rigor (91.8/100):} The reasoning is internally sound and its assumptions and inference boundaries are explicit.
+\par\textbf{Evidence (57.5/100):} Some relevant support is provided but a central claim remains insufficiently supported.
+\par Revision prompt: Connect each central claim to a specific result, derivation, or relevant citation.
+\par\textbf{Completeness (59.0/100):} The main information is present but an important detail is missing.
+\par Revision prompt: Add the missing details a reader would need to assess this section independently.
+\begin{quote}\small In this synthetic example, the baseline achieves 81.2\% accuracy with a standard deviation of 1.8
+percentage points across seeds. Temperature scaling achieves the same accuracy, as expected
+because it preserves the maximal-logit class. Mean expected calibration error decreases from 0.142 to
+0.061; standard deviations are 0.024 and 0.018 respectively. These numbers are illustrative fixture
+values, not outputs of a conducted experiment. No statistical significance or real-world improvement is
+claimed. A seed-level result table and confidence inter\end{quote}
+Passages evaluated: 1. Model: jev-1.13.0.
+\subsection{5 Discussion and Limitations}
+\par\textbf{Clarity (88.0/100):} Precise definitions and coherent organization make the meaning unambiguous.
+\par\textbf{Rigor (93.0/100):} The reasoning is internally sound and its assumptions and inference boundaries are explicit.
+\par\textbf{Evidence (74.0/100):} Central claims have specific relevant support with small omissions.
+\par Revision prompt: Connect each central claim to a specific result, derivation, or relevant citation.
+\par\textbf{Completeness (92.2/100):} The section's purpose is fully addressed with the details a critical reader needs.
+\begin{quote}\small The protocol illustrates why discrimination and calibration should be reported separately. The apparent
+calibration benefit applies only to the constructed distribution and should not be generalized to natural
+abstracts. Generated text can encode label shortcuts, a small test split makes bin-based calibration
+estimates unstable, and the experiment does not test distribution shift. The absence of executed
+experiments is a central limitation of this demonstration. Future work should use independently
+annotated documents, report inter-annotator ag\end{quote}
+Passages evaluated: 1. Model: jev-1.13.0.
+\subsection{6 Conclusion}
+\par\textbf{Clarity (82.2/100):} The argument is easy to follow with only minor ambiguity.
+\par\textbf{Rigor (95.8/100):} The reasoning is internally sound and its assumptions and inference boundaries are explicit.
+\par\textbf{Evidence (81.2/100):} Central claims have specific relevant support with small omissions.
+\par\textbf{Completeness (72.2/100):} The necessary details are present with only minor omissions.
+\par Revision prompt: Add the missing details a reader would need to assess this section independently.
+\begin{quote}\small We describe a transparent protocol for separating classifier accuracy from calibration quality. The
+synthetic values make the interface easy to inspect but supply no empirical evidence for deployment. A
+substantive contribution would require execution of the protocol on real documents, external replication,
+and careful analysis of uncertainty. Explicit scope and limitations are essential when presenting
+model-based assessments.
+Folio / illustrative manuscript                                      2\end{quote}
+Passages evaluated: 1. Model: jev-1.13.0.
+\subsection{References}
+\par\textbf{Clarity (92.8/100):} Precise definitions and coherent organization make the meaning unambiguous.
+\par\textbf{Rigor (34.5/100):} Central assumptions are unexamined and major inferential gaps remain.
+\par Revision prompt: State the assumptions and justify the inferential steps that connect evidence to claims.
+\par\textbf{Evidence (84.5/100):} Central claims have specific relevant support with small omissions.
+\par\textbf{Completeness (89.5/100):} The section's purpose is fully addressed with the details a critical reader needs.
+\begin{quote}\small [1] Gneiting, T. and Raftery, A. E. (2007). Strictly proper scoring rules, prediction, and estimation. Journal
+of the American Statistical Association, 102(477), 359-378.
+[2] Guo, C., Pleiss, G., Sun, Y., and Weinberger, K. Q. (2017). On Calibration of Modern Neural
+Networks. Proceedings of ICML, PMLR 70, 1321-1330.
+Folio / illustrative manuscript                                      3\end{quote}
+Passages evaluated: 1. Model: jev-1.13.0.
+\section{Limitations and provenance}
+\begin{itemize}
+\item This is a rubric-based assessment of extracted text, not a peer-review verdict. Figures, mathematical correctness, citation validity, and novelty require expert verification.
+\item Recommendation thresholds and weights are design choices and have not been calibrated against expert review outcomes.
+\item Non-ASCII characters are transliterated or replaced in this portable LaTeX export; use JSON for exact text.
+\end{itemize}
+Rubric: folio-1.0. Time: 0.69 seconds. Input tokens: 11830; output tokens: 488.
+\par API documentation: \url{https://docs.typesafe.ai/primitives/score}
+\end{document}

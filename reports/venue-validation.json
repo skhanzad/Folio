@@ -1,0 +1,251 @@
+{
+  "measured_at": "2026-09-19T13:41:45.016483+00:00",
+  "description": "Two fresh venue-grounded uploads of an original synthetic manuscript. Integration only; no human quality labels.",
+  "venue": {
+    "name": "NeurIPS 2026",
+    "website": "https://neurips.cc/Conferences/2026/ReviewerGuidelines",
+    "track": "General"
+  },
+  "trials": [
+    {
+      "review_id": "f83219bd-01f8-48c9-a504-dc7123a695eb",
+      "rubric_version": "folio-1.1",
+      "paper_sha256": "30bfd350be4f8c13c927a36e4367c3d2c6644f6e66aa198fce2629893e97796a",
+      "sections": 8,
+      "model": [
+        "jev-1.13.0"
+      ],
+      "score": 77.4,
+      "dimensions": {
+        "clarity": 90.4,
+        "rigor": 85.1,
+        "support": 72.3,
+        "completeness": 72.9,
+        "venue_fit": 65.2
+      },
+      "decision": "Promising \u00b7 minor revisions",
+      "confidence": 0.5,
+      "guidance_ready_ms": 771.7,
+      "first_section_ms": 1133.0,
+      "total_ms": 1487.2,
+      "events": [
+        {
+          "type": "status",
+          "elapsed_ms": 212.4
+        },
+        {
+          "type": "status",
+          "elapsed_ms": 222.9
+        },
+        {
+          "type": "venue",
+          "elapsed_ms": 771.7
+        },
+        {
+          "type": "paper",
+          "elapsed_ms": 771.8
+        },
+        {
+          "type": "section_start",
+          "elapsed_ms": 773.1
+        },
+        {
+          "type": "section_start",
+          "elapsed_ms": 773.2
+        },
+        {
+          "type": "section_start",
+          "elapsed_ms": 773.4
+        },
+        {
+          "type": "section_result",
+          "elapsed_ms": 1133.0
+        },
+        {
+          "type": "section_start",
+          "elapsed_ms": 1133.1
+        },
+        {
+          "type": "section_result",
+          "elapsed_ms": 1158.5
+        },
+        {
+          "type": "section_start",
+          "elapsed_ms": 1158.6
+        },
+        {
+          "type": "section_result",
+          "elapsed_ms": 1168.4
+        },
+        {
+          "type": "section_start",
+          "elapsed_ms": 1168.5
+        },
+        {
+          "type": "section_result",
+          "elapsed_ms": 1272.4
+        },
+        {
+          "type": "section_start",
+          "elapsed_ms": 1272.5
+        },
+        {
+          "type": "section_result",
+          "elapsed_ms": 1309.8
+        },
+        {
+          "type": "section_start",
+          "elapsed_ms": 1309.9
+        },
+        {
+          "type": "section_result",
+          "elapsed_ms": 1330.7
+        },
+        {
+          "type": "section_result",
+          "elapsed_ms": 1442.5
+        },
+        {
+          "type": "section_result",
+          "elapsed_ms": 1486.7
+        },
+        {
+          "type": "complete",
+          "elapsed_ms": 1487.2
+        }
+      ],
+      "input_tokens": 21518,
+      "output_tokens": 600,
+      "sources": [
+        {
+          "url": "https://neurips.cc/Conferences/2026/ReviewerGuidelines",
+          "title": "2026 Reviewer Guidelines",
+          "sha256": "d7a667d7d1268b3976635ff5b912406dfcee92baba40a671777fa6c04c11d334",
+          "retrieved_at": "2026-09-19T13:41:45.828780+00:00",
+          "passage_count": 4,
+          "passage_bytes": 1780
+        }
+      ]
+    },
+    {
+      "review_id": "cf622c6e-dc50-4d4e-aa11-10e8f657ad24",
+      "rubric_version": "folio-1.1",
+      "paper_sha256": "30bfd350be4f8c13c927a36e4367c3d2c6644f6e66aa198fce2629893e97796a",
+      "sections": 8,
+      "model": [
+        "jev-1.13.0"
+      ],
+      "score": 77.4,
+      "dimensions": {
+        "clarity": 90.6,
+        "rigor": 84.8,
+        "support": 72.2,
+        "completeness": 72.1,
+        "venue_fit": 65.9
+      },
+      "decision": "Promising \u00b7 minor revisions",
+      "confidence": 0.503,
+      "guidance_ready_ms": 465.9,
+      "first_section_ms": 773.6,
+      "total_ms": 1140.4,
+      "events": [
+        {
+          "type": "status",
+          "elapsed_ms": 4.8
+        },
+        {
+          "type": "status",
+          "elapsed_ms": 9.6
+        },
+        {
+          "type": "venue",
+          "elapsed_ms": 465.9
+        },
+        {
+          "type": "paper",
+          "elapsed_ms": 466.0
+        },
+        {
+          "type": "section_start",
+          "elapsed_ms": 467.3
+        },
+        {
+          "type": "section_start",
+          "elapsed_ms": 467.3
+        },
+        {
+          "type": "section_start",
+          "elapsed_ms": 467.4
+        },
+        {
+          "type": "section_result",
+          "elapsed_ms": 773.6
+        },
+        {
+          "type": "section_start",
+          "elapsed_ms": 773.8
+        },
+        {
+          "type": "section_result",
+          "elapsed_ms": 830.7
+        },
+        {
+          "type": "section_start",
+          "elapsed_ms": 830.9
+        },
+        {
+          "type": "section_result",
+          "elapsed_ms": 882.1
+        },
+        {
+          "type": "section_start",
+          "elapsed_ms": 882.2
+        },
+        {
+          "type": "section_result",
+          "elapsed_ms": 918.6
+        },
+        {
+          "type": "section_start",
+          "elapsed_ms": 918.7
+        },
+        {
+          "type": "section_result",
+          "elapsed_ms": 1001.1
+        },
+        {
+          "type": "section_start",
+          "elapsed_ms": 1001.3
+        },
+        {
+          "type": "section_result",
+          "elapsed_ms": 1045.3
+        },
+        {
+          "type": "section_result",
+          "elapsed_ms": 1074.3
+        },
+        {
+          "type": "section_result",
+          "elapsed_ms": 1140.2
+        },
+        {
+          "type": "complete",
+          "elapsed_ms": 1140.4
+        }
+      ],
+      "input_tokens": 21518,
+      "output_tokens": 600,
+      "sources": [
+        {
+          "url": "https://neurips.cc/Conferences/2026/ReviewerGuidelines",
+          "title": "2026 Reviewer Guidelines",
+          "sha256": "eebe82d4d7d145f7850066c4d0dc751a7c3f5190e2a1f377e43f4936516aa8bf",
+          "retrieved_at": "2026-09-19T13:41:47.016298+00:00",
+          "passage_count": 4,
+          "passage_bytes": 1780
+        }
+      ]
+    }
+  ]
+}

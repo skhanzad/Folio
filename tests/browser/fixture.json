@@ -1,0 +1,726 @@
+{
+  "review_id": "fixture",
+  "created_at": "2026-09-19T00:00:00Z",
+  "paper": {
+    "title": "Uncertainty-aware document classification",
+    "filename": "same-paper.pdf",
+    "pages": 3,
+    "word_count": 620,
+    "sha256": "fa4c4d17bfbf8398f1c6e4f69c585b75b0b32980cc12c333dbab0f451a841fce",
+    "sections": [
+      {
+        "id": "s1",
+        "title": "Abstract",
+        "role": "abstract",
+        "page_start": 1,
+        "page_end": 1,
+        "text": "We study whether explicit uncertainty reporting improves the interpretability of a small\ndocument-classification system. In this synthetic demonstration, a logistic regression baseline is\ncompared with temperature-scaled predictions on a fixed, balanced collection of 600 generated\nabstracts. We report held-out accuracy and calibration error over five random seeds. Calibration\nimproves while accuracy is unchanged within sampling variation. These illustrative results describe a\ncontrolled toy setting; they do not establish performance on real scholarly documents.",
+        "word_count": 73
+      },
+      {
+        "id": "s2",
+        "title": "1 Introduction",
+        "role": "introduction",
+        "page_start": 1,
+        "page_end": 1,
+        "text": "Automated document triage often exposes a class label without the uncertainty behind it. Readers may\nmistake a confident prediction for a reliable one. Our research question is whether a simple\npost-processing calibration step can improve the match between prediction confidence and observed\naccuracy without changing the classifier. The contribution is a small, reproducible evaluation protocol\nseparating training, calibration, and testing. This original synthetic manuscript is a software\ndemonstration and is not a published scientific study.",
+        "word_count": 75
+      },
+      {
+        "id": "s3",
+        "title": "2 Related Work",
+        "role": "related_work",
+        "page_start": 1,
+        "page_end": 1,
+        "text": "Proper scoring rules formalize evaluation of probabilistic predictions [1]. Calibration methods adjust\nconfidence estimates while preserving a predictor's ranking, with temperature scaling providing a simple\nexample [2]. Our protocol uses these established ideas rather than claiming a new calibration algorithm.\nA broader comparison with isotonic regression would help establish whether the chosen baseline is\nappropriate; that comparison is left for future work.\nFolio / illustrative manuscript                                      1",
+        "word_count": 67
+      },
+      {
+        "id": "s4",
+        "title": "3 Methods",
+        "role": "methods",
+        "page_start": 2,
+        "page_end": 2,
+        "text": "We construct 600 synthetic abstracts balanced across three topic classes. A fixed stratified split\nallocates 360 abstracts to training, 120 to calibration, and 120 to testing. A TF-IDF representation with\nunigrams and bigrams feeds a multinomial logistic regression with L2 regularization and C=1.\nVocabulary construction uses training data only. Temperature is selected on the calibration split by\nminimizing negative log likelihood. The held-out test split is never used for model or temperature\nselection. We repeat the procedure for random seeds 11, 23, 37, 41, and 59. Expected calibration error\nuses ten equal-width confidence bins. We report means and standard deviations across seeds.\nGenerated templates are separated between splits to reduce template leakage. This procedure can\nassess the toy data distribution only.",
+        "word_count": 121
+      },
+      {
+        "id": "s5",
+        "title": "4 Results",
+        "role": "results",
+        "page_start": 2,
+        "page_end": 2,
+        "text": "In this synthetic example, the baseline achieves 81.2% accuracy with a standard deviation of 1.8\npercentage points across seeds. Temperature scaling achieves the same accuracy, as expected\nbecause it preserves the maximal-logit class. Mean expected calibration error decreases from 0.142 to\n0.061; standard deviations are 0.024 and 0.018 respectively. These numbers are illustrative fixture\nvalues, not outputs of a conducted experiment. No statistical significance or real-world improvement is\nclaimed. A seed-level result table and confidence intervals would be needed for a publishable empirical\nevaluation.",
+        "word_count": 84
+      },
+      {
+        "id": "s6",
+        "title": "5 Discussion and Limitations",
+        "role": "discussion",
+        "page_start": 2,
+        "page_end": 2,
+        "text": "The protocol illustrates why discrimination and calibration should be reported separately. The apparent\ncalibration benefit applies only to the constructed distribution and should not be generalized to natural\nabstracts. Generated text can encode label shortcuts, a small test split makes bin-based calibration\nestimates unstable, and the experiment does not test distribution shift. The absence of executed\nexperiments is a central limitation of this demonstration. Future work should use independently\nannotated documents, report inter-annotator agreement, compare multiple calibration approaches, and\ninspect failure cases before making practical recommendations.",
+        "word_count": 86
+      },
+      {
+        "id": "s7",
+        "title": "6 Conclusion",
+        "role": "conclusion",
+        "page_start": 2,
+        "page_end": 2,
+        "text": "We describe a transparent protocol for separating classifier accuracy from calibration quality. The\nsynthetic values make the interface easy to inspect but supply no empirical evidence for deployment. A\nsubstantive contribution would require execution of the protocol on real documents, external replication,\nand careful analysis of uncertainty. Explicit scope and limitations are essential when presenting\nmodel-based assessments.\nFolio / illustrative manuscript                                      2",
+        "word_count": 62
+      },
+      {
+        "id": "s8",
+        "title": "References",
+        "role": "references",
+        "page_start": 3,
+        "page_end": 3,
+        "text": "[1] Gneiting, T. and Raftery, A. E. (2007). Strictly proper scoring rules, prediction, and estimation. Journal\nof the American Statistical Association, 102(477), 359-378.\n[2] Guo, C., Pleiss, G., Sun, Y., and Weinberger, K. Q. (2017). On Calibration of Modern Neural\nNetworks. Proceedings of ICML, PMLR 70, 1321-1330.\nFolio / illustrative manuscript                                      3",
+        "word_count": 52
+      }
+    ],
+    "warnings": []
+  },
+  "results": [
+    {
+      "section_id": "s1",
+      "score": 75.0,
+      "confidence": 0.8,
+      "dimensions": [
+        {
+          "key": "clarity",
+          "label": "Clarity",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.2,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The argument is easy to follow with only minor ambiguity.",
+          "suggestion": "Define key terms at first use and make the logical transitions explicit."
+        },
+        {
+          "key": "rigor",
+          "label": "Rigor",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.35,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The reasoning is well justified with explicit assumptions and minor gaps.",
+          "suggestion": "State the assumptions and justify the inferential steps that connect evidence to claims."
+        },
+        {
+          "key": "support",
+          "label": "Evidence",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.3,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "Central claims have specific relevant support with small omissions.",
+          "suggestion": "Connect each central claim to a specific result, derivation, or relevant citation."
+        },
+        {
+          "key": "completeness",
+          "label": "Completeness",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.15,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The necessary details are present with only minor omissions.",
+          "suggestion": "Add the missing details a reader would need to assess this section independently."
+        }
+      ],
+      "excerpt": "We study whether explicit uncertainty reporting improves the interpretability of a small\ndocument-classification system. In this synthetic demonstration, a logistic regression baseline is\ncompared with temperature-scaled predictions on a fixed, balanced collection of 600 generated\nabstracts. We report held-out accuracy and calibration error over five random seeds. Calibration\nimproves while accuracy is unchanged within sampling variation. These illustrative results describe a\ncontrolled toy setting; they do not establish performance on real sch",
+      "chunk_count": 1,
+      "latency_ms": 10,
+      "model": "jev-test-fixture"
+    },
+    {
+      "section_id": "s2",
+      "score": 75.0,
+      "confidence": 0.8,
+      "dimensions": [
+        {
+          "key": "clarity",
+          "label": "Clarity",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.2,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The argument is easy to follow with only minor ambiguity.",
+          "suggestion": "Define key terms at first use and make the logical transitions explicit."
+        },
+        {
+          "key": "rigor",
+          "label": "Rigor",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.35,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The reasoning is well justified with explicit assumptions and minor gaps.",
+          "suggestion": "State the assumptions and justify the inferential steps that connect evidence to claims."
+        },
+        {
+          "key": "support",
+          "label": "Evidence",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.3,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "Central claims have specific relevant support with small omissions.",
+          "suggestion": "Connect each central claim to a specific result, derivation, or relevant citation."
+        },
+        {
+          "key": "completeness",
+          "label": "Completeness",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.15,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The necessary details are present with only minor omissions.",
+          "suggestion": "Add the missing details a reader would need to assess this section independently."
+        }
+      ],
+      "excerpt": "Automated document triage often exposes a class label without the uncertainty behind it. Readers may\nmistake a confident prediction for a reliable one. Our research question is whether a simple\npost-processing calibration step can improve the match between prediction confidence and observed\naccuracy without changing the classifier. The contribution is a small, reproducible evaluation protocol\nseparating training, calibration, and testing. This original synthetic manuscript is a software\ndemonstration and is not a published scientific study.",
+      "chunk_count": 1,
+      "latency_ms": 10,
+      "model": "jev-test-fixture"
+    },
+    {
+      "section_id": "s3",
+      "score": 75.0,
+      "confidence": 0.8,
+      "dimensions": [
+        {
+          "key": "clarity",
+          "label": "Clarity",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.2,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The argument is easy to follow with only minor ambiguity.",
+          "suggestion": "Define key terms at first use and make the logical transitions explicit."
+        },
+        {
+          "key": "rigor",
+          "label": "Rigor",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.35,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The reasoning is well justified with explicit assumptions and minor gaps.",
+          "suggestion": "State the assumptions and justify the inferential steps that connect evidence to claims."
+        },
+        {
+          "key": "support",
+          "label": "Evidence",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.3,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "Central claims have specific relevant support with small omissions.",
+          "suggestion": "Connect each central claim to a specific result, derivation, or relevant citation."
+        },
+        {
+          "key": "completeness",
+          "label": "Completeness",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.15,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The necessary details are present with only minor omissions.",
+          "suggestion": "Add the missing details a reader would need to assess this section independently."
+        }
+      ],
+      "excerpt": "Proper scoring rules formalize evaluation of probabilistic predictions [1]. Calibration methods adjust\nconfidence estimates while preserving a predictor's ranking, with temperature scaling providing a simple\nexample [2]. Our protocol uses these established ideas rather than claiming a new calibration algorithm.\nA broader comparison with isotonic regression would help establish whether the chosen baseline is\nappropriate; that comparison is left for future work.\nFolio / illustrative manuscript                                      1",
+      "chunk_count": 1,
+      "latency_ms": 10,
+      "model": "jev-test-fixture"
+    },
+    {
+      "section_id": "s4",
+      "score": 75.0,
+      "confidence": 0.8,
+      "dimensions": [
+        {
+          "key": "clarity",
+          "label": "Clarity",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.2,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The argument is easy to follow with only minor ambiguity.",
+          "suggestion": "Define key terms at first use and make the logical transitions explicit."
+        },
+        {
+          "key": "rigor",
+          "label": "Rigor",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.35,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The reasoning is well justified with explicit assumptions and minor gaps.",
+          "suggestion": "State the assumptions and justify the inferential steps that connect evidence to claims."
+        },
+        {
+          "key": "support",
+          "label": "Evidence",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.3,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "Central claims have specific relevant support with small omissions.",
+          "suggestion": "Connect each central claim to a specific result, derivation, or relevant citation."
+        },
+        {
+          "key": "completeness",
+          "label": "Completeness",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.15,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The necessary details are present with only minor omissions.",
+          "suggestion": "Add the missing details a reader would need to assess this section independently."
+        }
+      ],
+      "excerpt": "We construct 600 synthetic abstracts balanced across three topic classes. A fixed stratified split\nallocates 360 abstracts to training, 120 to calibration, and 120 to testing. A TF-IDF representation with\nunigrams and bigrams feeds a multinomial logistic regression with L2 regularization and C=1.\nVocabulary construction uses training data only. Temperature is selected on the calibration split by\nminimizing negative log likelihood. The held-out test split is never used for model or temperature\nselection. We repeat the procedure for random seeds ",
+      "chunk_count": 1,
+      "latency_ms": 10,
+      "model": "jev-test-fixture"
+    },
+    {
+      "section_id": "s5",
+      "score": 75.0,
+      "confidence": 0.8,
+      "dimensions": [
+        {
+          "key": "clarity",
+          "label": "Clarity",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.2,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The argument is easy to follow with only minor ambiguity.",
+          "suggestion": "Define key terms at first use and make the logical transitions explicit."
+        },
+        {
+          "key": "rigor",
+          "label": "Rigor",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.35,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The reasoning is well justified with explicit assumptions and minor gaps.",
+          "suggestion": "State the assumptions and justify the inferential steps that connect evidence to claims."
+        },
+        {
+          "key": "support",
+          "label": "Evidence",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.3,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "Central claims have specific relevant support with small omissions.",
+          "suggestion": "Connect each central claim to a specific result, derivation, or relevant citation."
+        },
+        {
+          "key": "completeness",
+          "label": "Completeness",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.15,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The necessary details are present with only minor omissions.",
+          "suggestion": "Add the missing details a reader would need to assess this section independently."
+        }
+      ],
+      "excerpt": "In this synthetic example, the baseline achieves 81.2% accuracy with a standard deviation of 1.8\npercentage points across seeds. Temperature scaling achieves the same accuracy, as expected\nbecause it preserves the maximal-logit class. Mean expected calibration error decreases from 0.142 to\n0.061; standard deviations are 0.024 and 0.018 respectively. These numbers are illustrative fixture\nvalues, not outputs of a conducted experiment. No statistical significance or real-world improvement is\nclaimed. A seed-level result table and confidence inter",
+      "chunk_count": 1,
+      "latency_ms": 10,
+      "model": "jev-test-fixture"
+    },
+    {
+      "section_id": "s6",
+      "score": 75.0,
+      "confidence": 0.8,
+      "dimensions": [
+        {
+          "key": "clarity",
+          "label": "Clarity",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.2,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The argument is easy to follow with only minor ambiguity.",
+          "suggestion": "Define key terms at first use and make the logical transitions explicit."
+        },
+        {
+          "key": "rigor",
+          "label": "Rigor",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.35,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The reasoning is well justified with explicit assumptions and minor gaps.",
+          "suggestion": "State the assumptions and justify the inferential steps that connect evidence to claims."
+        },
+        {
+          "key": "support",
+          "label": "Evidence",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.3,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "Central claims have specific relevant support with small omissions.",
+          "suggestion": "Connect each central claim to a specific result, derivation, or relevant citation."
+        },
+        {
+          "key": "completeness",
+          "label": "Completeness",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.15,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The necessary details are present with only minor omissions.",
+          "suggestion": "Add the missing details a reader would need to assess this section independently."
+        }
+      ],
+      "excerpt": "The protocol illustrates why discrimination and calibration should be reported separately. The apparent\ncalibration benefit applies only to the constructed distribution and should not be generalized to natural\nabstracts. Generated text can encode label shortcuts, a small test split makes bin-based calibration\nestimates unstable, and the experiment does not test distribution shift. The absence of executed\nexperiments is a central limitation of this demonstration. Future work should use independently\nannotated documents, report inter-annotator ag",
+      "chunk_count": 1,
+      "latency_ms": 10,
+      "model": "jev-test-fixture"
+    },
+    {
+      "section_id": "s7",
+      "score": 75.0,
+      "confidence": 0.8,
+      "dimensions": [
+        {
+          "key": "clarity",
+          "label": "Clarity",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.2,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The argument is easy to follow with only minor ambiguity.",
+          "suggestion": "Define key terms at first use and make the logical transitions explicit."
+        },
+        {
+          "key": "rigor",
+          "label": "Rigor",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.35,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The reasoning is well justified with explicit assumptions and minor gaps.",
+          "suggestion": "State the assumptions and justify the inferential steps that connect evidence to claims."
+        },
+        {
+          "key": "support",
+          "label": "Evidence",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.3,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "Central claims have specific relevant support with small omissions.",
+          "suggestion": "Connect each central claim to a specific result, derivation, or relevant citation."
+        },
+        {
+          "key": "completeness",
+          "label": "Completeness",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.15,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The necessary details are present with only minor omissions.",
+          "suggestion": "Add the missing details a reader would need to assess this section independently."
+        }
+      ],
+      "excerpt": "We describe a transparent protocol for separating classifier accuracy from calibration quality. The\nsynthetic values make the interface easy to inspect but supply no empirical evidence for deployment. A\nsubstantive contribution would require execution of the protocol on real documents, external replication,\nand careful analysis of uncertainty. Explicit scope and limitations are essential when presenting\nmodel-based assessments.\nFolio / illustrative manuscript                                      2",
+      "chunk_count": 1,
+      "latency_ms": 10,
+      "model": "jev-test-fixture"
+    },
+    {
+      "section_id": "s8",
+      "score": 75.0,
+      "confidence": 0.8,
+      "dimensions": [
+        {
+          "key": "clarity",
+          "label": "Clarity",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.2,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The argument is easy to follow with only minor ambiguity.",
+          "suggestion": "Define key terms at first use and make the logical transitions explicit."
+        },
+        {
+          "key": "rigor",
+          "label": "Rigor",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.35,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The reasoning is well justified with explicit assumptions and minor gaps.",
+          "suggestion": "State the assumptions and justify the inferential steps that connect evidence to claims."
+        },
+        {
+          "key": "support",
+          "label": "Evidence",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.3,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "Central claims have specific relevant support with small omissions.",
+          "suggestion": "Connect each central claim to a specific result, derivation, or relevant citation."
+        },
+        {
+          "key": "completeness",
+          "label": "Completeness",
+          "score": 75.0,
+          "confidence": 0.8,
+          "weight": 0.15,
+          "probabilities": {
+            "0": 0.0,
+            "1": 0.0,
+            "2": 0.0,
+            "3": 1.0,
+            "4": 0.0
+          },
+          "finding": "The necessary details are present with only minor omissions.",
+          "suggestion": "Add the missing details a reader would need to assess this section independently."
+        }
+      ],
+      "excerpt": "[1] Gneiting, T. and Raftery, A. E. (2007). Strictly proper scoring rules, prediction, and estimation. Journal\nof the American Statistical Association, 102(477), 359-378.\n[2] Guo, C., Pleiss, G., Sun, Y., and Weinberger, K. Q. (2017). On Calibration of Modern Neural\nNetworks. Proceedings of ICML, PMLR 70, 1321-1330.\nFolio / illustrative manuscript                                      3",
+      "chunk_count": 1,
+      "latency_ms": 10,
+      "model": "jev-test-fixture"
+    }
+  ],
+  "summary": {
+    "score": 75.0,
+    "confidence": 0.8,
+    "decision": "Promising · minor revisions",
+    "complete": true,
+    "reviewed": 8,
+    "total": 8,
+    "dimensions": {
+      "clarity": 75.0,
+      "rigor": 75.0,
+      "support": 75.0,
+      "completeness": 75.0
+    },
+    "section_weights": {
+      "s1": 0.05,
+      "s2": 0.1,
+      "s3": 0.1,
+      "s4": 0.25,
+      "s5": 0.25,
+      "s6": 0.12000000000000001,
+      "s7": 0.08,
+      "s8": 0.05
+    },
+    "strengths": [
+      "References: The necessary details are present with only minor omissions.",
+      "References: Central claims have specific relevant support with small omissions.",
+      "References: The reasoning is well justified with explicit assumptions and minor gaps."
+    ],
+    "improvements": [],
+    "notes": [
+      "This is a rubric-based assessment of extracted text, not a peer-review verdict. Figures, mathematical correctness, citation validity, and novelty require expert verification."
+    ]
+  },
+  "rubric_version": "folio-1.0",
+  "profile": "research",
+  "elapsed_ms": 500,
+  "input_tokens": 0,
+  "output_tokens": 0
+}

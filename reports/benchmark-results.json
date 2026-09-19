@@ -1,0 +1,2329 @@
+{
+  "measured_at": "2026-09-19T07:34:05.889500+00:00",
+  "description": "Live engineering and sensitivity checks. No human ground truth; no accuracy claim.",
+  "python": "3.11.7",
+  "dependencies": {
+    "pymupdf": "1.28.2",
+    "fastapi": "0.141.1",
+    "httpx": "0.28.1"
+  },
+  "public_source": "https://arxiv.org/abs/1706.04599v2",
+  "cases": [
+    {
+      "name": "structured_synthetic",
+      "title": "Uncertainty-aware document classification",
+      "pages": 3,
+      "words": 620,
+      "sections": 8,
+      "sha256": "9689e3628279d513255f5fde43256dc6ab6b74ffc24265803608aadd1ecc7451",
+      "model": [
+        "jev-1.13.0"
+      ],
+      "rubric_version": "folio-1.0",
+      "warnings": [],
+      "trials": [
+        {
+          "review_id": "580bc56f-f63a-4674-bbf9-2bdc5960ff8f",
+          "score": 80.6,
+          "confidence": 0.508,
+          "decision": "Promising \u00b7 minor revisions",
+          "first_section_ms": 332.1,
+          "total_ms": 699.4,
+          "server_elapsed_ms": 690,
+          "events": [
+            {
+              "type": "status",
+              "elapsed_ms": 20.5
+            },
+            {
+              "type": "paper",
+              "elapsed_ms": 28.6
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 332.1
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 389.0
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 395.0
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 510.5
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 530.2
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 634.4
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 655.7
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 699.3
+            },
+            {
+              "type": "complete",
+              "elapsed_ms": 699.4
+            }
+          ],
+          "input_tokens": 11830,
+          "output_tokens": 488,
+          "section_results": [
+            {
+              "title": "Abstract",
+              "role": "abstract",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 87.05,
+              "confidence": 0.5715,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 87.0,
+                "rigor": 86.5,
+                "support": 87.25,
+                "completeness": 88.0
+              }
+            },
+            {
+              "title": "1 Introduction",
+              "role": "introduction",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 75.36,
+              "confidence": 0.4255,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 86.75,
+                "rigor": 88.5,
+                "support": 50.5,
+                "completeness": 79.25
+              }
+            },
+            {
+              "title": "2 Related Work",
+              "role": "related_work",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 73.3,
+              "confidence": 0.4215,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 82.5,
+                "rigor": 80.75,
+                "support": 71.25,
+                "completeness": 47.75
+              }
+            },
+            {
+              "title": "3 Methods",
+              "role": "methods",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 86.31,
+              "confidence": 0.6215,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 92.75,
+                "rigor": 88.5,
+                "support": 85.5,
+                "completeness": 74.25
+              }
+            },
+            {
+              "title": "4 Results",
+              "role": "results",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 76.86,
+              "confidence": 0.441,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 93.25,
+                "rigor": 91.75,
+                "support": 57.5,
+                "completeness": 59.0
+              }
+            },
+            {
+              "title": "5 Discussion and Limitations",
+              "role": "discussion",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 86.19,
+              "confidence": 0.536,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 88.0,
+                "rigor": 93.0,
+                "support": 74.0,
+                "completeness": 92.25
+              }
+            },
+            {
+              "title": "6 Conclusion",
+              "role": "conclusion",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 85.17,
+              "confidence": 0.567,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 82.25,
+                "rigor": 95.75,
+                "support": 81.25,
+                "completeness": 72.25
+              }
+            },
+            {
+              "title": "References",
+              "role": "references",
+              "pages": [
+                3,
+                3
+              ],
+              "score": 69.4,
+              "confidence": 0.3965,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 92.75,
+                "rigor": 34.5,
+                "support": 84.5,
+                "completeness": 89.5
+              }
+            }
+          ]
+        },
+        {
+          "review_id": "b9c5be1e-3be6-43ed-865f-3874d3d8c67e",
+          "score": 81.0,
+          "confidence": 0.522,
+          "decision": "Promising \u00b7 minor revisions",
+          "first_section_ms": 297.2,
+          "total_ms": 735.1,
+          "server_elapsed_ms": 733,
+          "events": [
+            {
+              "type": "status",
+              "elapsed_ms": 6.6
+            },
+            {
+              "type": "paper",
+              "elapsed_ms": 11.6
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 297.2
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 299.1
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 430.3
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 501.8
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 567.2
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 604.7
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 641.8
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 734.8
+            },
+            {
+              "type": "complete",
+              "elapsed_ms": 735.1
+            }
+          ],
+          "input_tokens": 11830,
+          "output_tokens": 488,
+          "section_results": [
+            {
+              "title": "Abstract",
+              "role": "abstract",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 86.96,
+              "confidence": 0.5635,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 87.5,
+                "rigor": 86.5,
+                "support": 87.5,
+                "completeness": 86.25
+              }
+            },
+            {
+              "title": "1 Introduction",
+              "role": "introduction",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 75.26,
+              "confidence": 0.42,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 87.0,
+                "rigor": 88.5,
+                "support": 49.75,
+                "completeness": 79.75
+              }
+            },
+            {
+              "title": "2 Related Work",
+              "role": "related_work",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 72.89,
+              "confidence": 0.4475,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 83.75,
+                "rigor": 81.0,
+                "support": 69.25,
+                "completeness": 46.75
+              }
+            },
+            {
+              "title": "3 Methods",
+              "role": "methods",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 87.12,
+              "confidence": 0.6455,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 92.75,
+                "rigor": 89.0,
+                "support": 87.0,
+                "completeness": 75.5
+              }
+            },
+            {
+              "title": "4 Results",
+              "role": "results",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 77.39,
+              "confidence": 0.4485,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 94.0,
+                "rigor": 91.75,
+                "support": 58.25,
+                "completeness": 60.0
+              }
+            },
+            {
+              "title": "5 Discussion and Limitations",
+              "role": "discussion",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 86.97,
+              "confidence": 0.5675,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 87.5,
+                "rigor": 94.25,
+                "support": 75.5,
+                "completeness": 92.25
+              }
+            },
+            {
+              "title": "6 Conclusion",
+              "role": "conclusion",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 85.16,
+              "confidence": 0.5765,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 81.0,
+                "rigor": 96.0,
+                "support": 81.0,
+                "completeness": 73.75
+              }
+            },
+            {
+              "title": "References",
+              "role": "references",
+              "pages": [
+                3,
+                3
+              ],
+              "score": 68.74,
+              "confidence": 0.3845,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 92.75,
+                "rigor": 33.25,
+                "support": 84.0,
+                "completeness": 89.0
+              }
+            }
+          ]
+        },
+        {
+          "review_id": "66c92051-a04c-42cd-8c85-c32f4cc849a7",
+          "score": 80.5,
+          "confidence": 0.508,
+          "decision": "Promising \u00b7 minor revisions",
+          "first_section_ms": 279.4,
+          "total_ms": 681.9,
+          "server_elapsed_ms": 680,
+          "events": [
+            {
+              "type": "status",
+              "elapsed_ms": 5.0
+            },
+            {
+              "type": "paper",
+              "elapsed_ms": 9.8
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 279.4
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 310.5
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 363.3
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 450.0
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 450.6
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 494.6
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 658.6
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 681.7
+            },
+            {
+              "type": "complete",
+              "elapsed_ms": 681.9
+            }
+          ],
+          "input_tokens": 11830,
+          "output_tokens": 488,
+          "section_results": [
+            {
+              "title": "Abstract",
+              "role": "abstract",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 87.19,
+              "confidence": 0.578,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 86.75,
+                "rigor": 86.5,
+                "support": 88.25,
+                "completeness": 87.25
+              }
+            },
+            {
+              "title": "1 Introduction",
+              "role": "introduction",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 75.71,
+              "confidence": 0.431,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 86.5,
+                "rigor": 89.0,
+                "support": 50.75,
+                "completeness": 80.25
+              }
+            },
+            {
+              "title": "2 Related Work",
+              "role": "related_work",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 73.74,
+              "confidence": 0.426,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 83.25,
+                "rigor": 81.25,
+                "support": 71.5,
+                "completeness": 48.0
+              }
+            },
+            {
+              "title": "3 Methods",
+              "role": "methods",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 86.01,
+              "confidence": 0.616,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 93.25,
+                "rigor": 88.75,
+                "support": 84.25,
+                "completeness": 73.5
+              }
+            },
+            {
+              "title": "4 Results",
+              "role": "results",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 76.06,
+              "confidence": 0.4395,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 93.0,
+                "rigor": 91.75,
+                "support": 54.25,
+                "completeness": 60.5
+              }
+            },
+            {
+              "title": "5 Discussion and Limitations",
+              "role": "discussion",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 86.35,
+              "confidence": 0.549,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 88.0,
+                "rigor": 93.25,
+                "support": 74.0,
+                "completeness": 92.75
+              }
+            },
+            {
+              "title": "6 Conclusion",
+              "role": "conclusion",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 85.29,
+              "confidence": 0.569,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 81.75,
+                "rigor": 96.25,
+                "support": 80.75,
+                "completeness": 73.5
+              }
+            },
+            {
+              "title": "References",
+              "role": "references",
+              "pages": [
+                3,
+                3
+              ],
+              "score": 68.86,
+              "confidence": 0.3625,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 92.25,
+                "rigor": 35.5,
+                "support": 82.5,
+                "completeness": 88.25
+              }
+            }
+          ]
+        }
+      ],
+      "mean_score": 80.7,
+      "score_stdev": 0.26457513110646014,
+      "mean_first_section_ms": 302.9,
+      "mean_total_ms": 705.4666666666667
+    },
+    {
+      "name": "vague_synthetic",
+      "title": "Uncertainty-aware document classification",
+      "pages": 2,
+      "words": 382,
+      "sections": 8,
+      "sha256": "eca73d84472d0243449096a8636b22890784041c62380b6a92951b137735d8ad",
+      "model": [
+        "jev-1.13.0"
+      ],
+      "rubric_version": "folio-1.0",
+      "warnings": [],
+      "trials": [
+        {
+          "review_id": "ae2f9e14-1023-4dc6-a4f4-6c4d9323a424",
+          "score": 20.5,
+          "confidence": 0.833,
+          "decision": "Needs substantial work",
+          "first_section_ms": 280.2,
+          "total_ms": 612.0,
+          "server_elapsed_ms": 610,
+          "events": [
+            {
+              "type": "status",
+              "elapsed_ms": 4.6
+            },
+            {
+              "type": "paper",
+              "elapsed_ms": 8.2
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 280.2
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 283.6
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 348.0
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 438.4
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 445.3
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 493.8
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 611.3
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 611.9
+            },
+            {
+              "type": "complete",
+              "elapsed_ms": 612.0
+            }
+          ],
+          "input_tokens": 11444,
+          "output_tokens": 488,
+          "section_results": [
+            {
+              "title": "Abstract",
+              "role": "abstract",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 87.51,
+              "confidence": 0.5855,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 87.5,
+                "rigor": 87.0,
+                "support": 88.25,
+                "completeness": 87.25
+              }
+            },
+            {
+              "title": "1 Introduction",
+              "role": "introduction",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 15.32,
+              "confidence": 0.8815,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 70.75,
+                "rigor": 2.5,
+                "support": 0.25,
+                "completeness": 1.5
+              }
+            },
+            {
+              "title": "2 Related Work",
+              "role": "related_work",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 14.64,
+              "confidence": 0.895,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 70.0,
+                "rigor": 1.5,
+                "support": 0.25,
+                "completeness": 0.25
+              }
+            },
+            {
+              "title": "3 Methods",
+              "role": "methods",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 13.36,
+              "confidence": 0.883,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 64.75,
+                "rigor": 0.75,
+                "support": 0.25,
+                "completeness": 0.5
+              }
+            },
+            {
+              "title": "4 Results",
+              "role": "results",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 12.55,
+              "confidence": 0.841,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 59.0,
+                "rigor": 1.5,
+                "support": 0.25,
+                "completeness": 1.0
+              }
+            },
+            {
+              "title": "5 Discussion and Limitations",
+              "role": "discussion",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 16.06,
+              "confidence": 0.887,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 74.25,
+                "rigor": 2.5,
+                "support": 0.5,
+                "completeness": 1.25
+              }
+            },
+            {
+              "title": "6 Conclusion",
+              "role": "conclusion",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 16.01,
+              "confidence": 0.8675,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 72.0,
+                "rigor": 3.0,
+                "support": 0.5,
+                "completeness": 2.75
+              }
+            },
+            {
+              "title": "References",
+              "role": "references",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 69.53,
+              "confidence": 0.391,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 93.0,
+                "rigor": 35.25,
+                "support": 84.0,
+                "completeness": 89.25
+              }
+            }
+          ]
+        },
+        {
+          "review_id": "0a85958e-5948-4c21-9f93-0512e89098f4",
+          "score": 20.5,
+          "confidence": 0.829,
+          "decision": "Needs substantial work",
+          "first_section_ms": 275.7,
+          "total_ms": 723.1,
+          "server_elapsed_ms": 721,
+          "events": [
+            {
+              "type": "status",
+              "elapsed_ms": 4.7
+            },
+            {
+              "type": "paper",
+              "elapsed_ms": 8.4
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 275.7
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 314.6
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 352.4
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 467.8
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 484.7
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 485.1
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 662.8
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 722.9
+            },
+            {
+              "type": "complete",
+              "elapsed_ms": 723.1
+            }
+          ],
+          "input_tokens": 11444,
+          "output_tokens": 488,
+          "section_results": [
+            {
+              "title": "Abstract",
+              "role": "abstract",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 86.64,
+              "confidence": 0.563,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 87.0,
+                "rigor": 85.75,
+                "support": 87.5,
+                "completeness": 86.5
+              }
+            },
+            {
+              "title": "1 Introduction",
+              "role": "introduction",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 15.47,
+              "confidence": 0.8675,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 70.0,
+                "rigor": 3.25,
+                "support": 0.25,
+                "completeness": 1.75
+              }
+            },
+            {
+              "title": "2 Related Work",
+              "role": "related_work",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 14.43,
+              "confidence": 0.8885,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 68.5,
+                "rigor": 1.75,
+                "support": 0.25,
+                "completeness": 0.25
+              }
+            },
+            {
+              "title": "3 Methods",
+              "role": "methods",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 12.85,
+              "confidence": 0.866,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 62.0,
+                "rigor": 0.75,
+                "support": 0.25,
+                "completeness": 0.75
+              }
+            },
+            {
+              "title": "4 Results",
+              "role": "results",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 13.41,
+              "confidence": 0.861,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 63.5,
+                "rigor": 1.5,
+                "support": 0.25,
+                "completeness": 0.75
+              }
+            },
+            {
+              "title": "5 Discussion and Limitations",
+              "role": "discussion",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 15.81,
+              "confidence": 0.8765,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 73.0,
+                "rigor": 2.5,
+                "support": 0.5,
+                "completeness": 1.25
+              }
+            },
+            {
+              "title": "6 Conclusion",
+              "role": "conclusion",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 16.19,
+              "confidence": 0.873,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 73.0,
+                "rigor": 3.25,
+                "support": 0.5,
+                "completeness": 2.0
+              }
+            },
+            {
+              "title": "References",
+              "role": "references",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 68.38,
+              "confidence": 0.3765,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 91.5,
+                "rigor": 33.25,
+                "support": 84.0,
+                "completeness": 88.25
+              }
+            }
+          ]
+        },
+        {
+          "review_id": "d38df6a7-b264-497a-8967-a6b37e96a6d6",
+          "score": 20.4,
+          "confidence": 0.828,
+          "decision": "Needs substantial work",
+          "first_section_ms": 271.1,
+          "total_ms": 633.8,
+          "server_elapsed_ms": 632,
+          "events": [
+            {
+              "type": "status",
+              "elapsed_ms": 5.7
+            },
+            {
+              "type": "paper",
+              "elapsed_ms": 9.3
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 271.1
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 282.7
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 372.7
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 425.6
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 428.7
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 570.7
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 625.7
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 633.7
+            },
+            {
+              "type": "complete",
+              "elapsed_ms": 633.8
+            }
+          ],
+          "input_tokens": 11444,
+          "output_tokens": 488,
+          "section_results": [
+            {
+              "title": "Abstract",
+              "role": "abstract",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 86.92,
+              "confidence": 0.566,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 87.25,
+                "rigor": 86.0,
+                "support": 88.0,
+                "completeness": 86.5
+              }
+            },
+            {
+              "title": "1 Introduction",
+              "role": "introduction",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 15.28,
+              "confidence": 0.8715,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 69.25,
+                "rigor": 3.0,
+                "support": 0.25,
+                "completeness": 2.0
+              }
+            },
+            {
+              "title": "2 Related Work",
+              "role": "related_work",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 14.72,
+              "confidence": 0.8945,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 70.0,
+                "rigor": 1.75,
+                "support": 0.25,
+                "completeness": 0.25
+              }
+            },
+            {
+              "title": "3 Methods",
+              "role": "methods",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 12.75,
+              "confidence": 0.8655,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 61.25,
+                "rigor": 1.0,
+                "support": 0.25,
+                "completeness": 0.5
+              }
+            },
+            {
+              "title": "4 Results",
+              "role": "results",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 12.73,
+              "confidence": 0.8485,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 60.5,
+                "rigor": 1.25,
+                "support": 0.25,
+                "completeness": 0.75
+              }
+            },
+            {
+              "title": "5 Discussion and Limitations",
+              "role": "discussion",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 16.16,
+              "confidence": 0.879,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 73.5,
+                "rigor": 3.0,
+                "support": 0.5,
+                "completeness": 1.75
+              }
+            },
+            {
+              "title": "6 Conclusion",
+              "role": "conclusion",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 16.12,
+              "confidence": 0.8735,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 72.5,
+                "rigor": 3.25,
+                "support": 0.5,
+                "completeness": 2.25
+              }
+            },
+            {
+              "title": "References",
+              "role": "references",
+              "pages": [
+                2,
+                2
+              ],
+              "score": 68.52,
+              "confidence": 0.3915,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 93.5,
+                "rigor": 32.0,
+                "support": 84.25,
+                "completeness": 89.0
+              }
+            }
+          ]
+        }
+      ],
+      "mean_score": 20.466666666666665,
+      "score_stdev": 0.0577350269189634,
+      "mean_first_section_ms": 275.6666666666667,
+      "mean_total_ms": 656.3
+    },
+    {
+      "name": "guo_2017_calibration",
+      "title": "On Calibration of Modern Neural Networks",
+      "pages": 14,
+      "words": 8765,
+      "sections": 16,
+      "sha256": "cb654a65acb785ed4387d6c2db1301d065075dddc2d363676836a2f2a14bc50d",
+      "model": [
+        "jev-1.13.0"
+      ],
+      "rubric_version": "folio-1.0",
+      "warnings": [],
+      "trials": [
+        {
+          "review_id": "3c8b6b16-933b-4ec1-99ac-ee59d2a76db7",
+          "score": 68.8,
+          "confidence": 0.506,
+          "decision": "Major revisions suggested",
+          "first_section_ms": 424.4,
+          "total_ms": 1246.9,
+          "server_elapsed_ms": 1240,
+          "events": [
+            {
+              "type": "status",
+              "elapsed_ms": 8.5
+            },
+            {
+              "type": "paper",
+              "elapsed_ms": 121.4
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 424.4
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 461.7
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 495.6
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 584.8
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 616.4
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 716.8
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 743.0
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 806.7
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 874.2
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 898.9
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 946.5
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 1027.8
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 1061.6
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 1138.1
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 1171.6
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 1246.5
+            },
+            {
+              "type": "complete",
+              "elapsed_ms": 1246.9
+            }
+          ],
+          "input_tokens": 43248,
+          "output_tokens": 976,
+          "section_results": [
+            {
+              "title": "Abstract",
+              "role": "abstract",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 57.9,
+              "confidence": 0.505,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 85.75,
+                "rigor": 47.75,
+                "support": 44.25,
+                "completeness": 71.75
+              }
+            },
+            {
+              "title": "1. Introduction",
+              "role": "introduction",
+              "pages": [
+                1,
+                2
+              ],
+              "score": 69.0,
+              "confidence": 0.611,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 85.75,
+                "rigor": 55.25,
+                "support": 68.0,
+                "completeness": 80.75
+              }
+            },
+            {
+              "title": "2. Definitions",
+              "role": "related_work",
+              "pages": [
+                2,
+                3
+              ],
+              "score": 76.83,
+              "confidence": 0.284,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 89.0,
+                "rigor": 80.25,
+                "support": 74.0,
+                "completeness": 58.25
+              }
+            },
+            {
+              "title": "3. Observing Miscalibration",
+              "role": "other",
+              "pages": [
+                3,
+                4
+              ],
+              "score": 67.96,
+              "confidence": 0.6995,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 78.75,
+                "rigor": 55.75,
+                "support": 74.75,
+                "completeness": 68.5
+              }
+            },
+            {
+              "title": "4. Calibration Methods",
+              "role": "methods",
+              "pages": [
+                4,
+                4
+              ],
+              "score": 56.88,
+              "confidence": 0.415,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 85.0,
+                "rigor": 67.0,
+                "support": 35.5,
+                "completeness": 38.5
+              }
+            },
+            {
+              "title": "4.1. Calibrating Binary Models",
+              "role": "methods",
+              "pages": [
+                4,
+                5
+              ],
+              "score": 77.96,
+              "confidence": 0.4445,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 94.25,
+                "rigor": 75.25,
+                "support": 73.5,
+                "completeness": 71.5
+              }
+            },
+            {
+              "title": "4.2. Extension to Multiclass Models",
+              "role": "methods",
+              "pages": [
+                5,
+                6
+              ],
+              "score": 66.36,
+              "confidence": 0.4345,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 72.0,
+                "rigor": 64.25,
+                "support": 63.0,
+                "completeness": 70.5
+              }
+            },
+            {
+              "title": "4.3. Other Related Works",
+              "role": "related_work",
+              "pages": [
+                6,
+                7
+              ],
+              "score": 68.16,
+              "confidence": 0.445,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 76.25,
+                "rigor": 61.5,
+                "support": 66.25,
+                "completeness": 76.75
+              }
+            },
+            {
+              "title": "5. Results",
+              "role": "results",
+              "pages": [
+                7,
+                8
+              ],
+              "score": 70.76,
+              "confidence": 0.595,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 84.5,
+                "rigor": 61.75,
+                "support": 74.5,
+                "completeness": 66.0
+              }
+            },
+            {
+              "title": "6. Conclusion",
+              "role": "conclusion",
+              "pages": [
+                8,
+                8
+              ],
+              "score": 62.66,
+              "confidence": 0.4795,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 79.5,
+                "rigor": 59.25,
+                "support": 56.0,
+                "completeness": 61.5
+              }
+            },
+            {
+              "title": "Acknowledgments",
+              "role": "other",
+              "pages": [
+                9,
+                9
+              ],
+              "score": 50.46,
+              "confidence": 0.5215,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 94.25,
+                "rigor": 6.0,
+                "support": 55.5,
+                "completeness": 85.75
+              }
+            },
+            {
+              "title": "References",
+              "role": "references",
+              "pages": [
+                9,
+                10
+              ],
+              "score": 60.56,
+              "confidence": 0.321,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 90.5,
+                "rigor": 22.75,
+                "support": 72.5,
+                "completeness": 85.0
+              }
+            },
+            {
+              "title": "S1. Further Information on Calibration Metrics",
+              "role": "appendix",
+              "pages": [
+                11,
+                11
+              ],
+              "score": 59.88,
+              "confidence": 0.4195,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 61.75,
+                "rigor": 55.0,
+                "support": 59.5,
+                "completeness": 69.5
+              }
+            },
+            {
+              "title": "S2. Further Information on Temperature Scaling",
+              "role": "appendix",
+              "pages": [
+                11,
+                11
+              ],
+              "score": 53.24,
+              "confidence": 0.3515,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 50.75,
+                "rigor": 37.5,
+                "support": 67.5,
+                "completeness": 64.75
+              }
+            },
+            {
+              "title": "S3. Additional Tables",
+              "role": "appendix",
+              "pages": [
+                11,
+                12
+              ],
+              "score": 53.9,
+              "confidence": 0.344,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 55.25,
+                "rigor": 36.5,
+                "support": 72.75,
+                "completeness": 55.0
+              }
+            },
+            {
+              "title": "S4. Additional Reliability Diagrams",
+              "role": "appendix",
+              "pages": [
+                12,
+                14
+              ],
+              "score": 65.78,
+              "confidence": 0.3175,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 73.0,
+                "rigor": 42.5,
+                "support": 85.5,
+                "completeness": 71.0
+              }
+            }
+          ]
+        },
+        {
+          "review_id": "5cba9887-b39b-4144-928c-8da817460574",
+          "score": 68.9,
+          "confidence": 0.513,
+          "decision": "Major revisions suggested",
+          "first_section_ms": 397.8,
+          "total_ms": 1251.3,
+          "server_elapsed_ms": 1246,
+          "events": [
+            {
+              "type": "status",
+              "elapsed_ms": 6.8
+            },
+            {
+              "type": "paper",
+              "elapsed_ms": 102.7
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 397.8
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 453.8
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 466.8
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 538.3
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 589.4
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 642.4
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 734.5
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 745.5
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 845.8
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 934.6
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 939.5
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 1022.0
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 1106.9
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 1172.5
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 1230.3
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 1250.8
+            },
+            {
+              "type": "complete",
+              "elapsed_ms": 1251.3
+            }
+          ],
+          "input_tokens": 43248,
+          "output_tokens": 976,
+          "section_results": [
+            {
+              "title": "Abstract",
+              "role": "abstract",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 58.11,
+              "confidence": 0.513,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 86.25,
+                "rigor": 47.75,
+                "support": 43.25,
+                "completeness": 74.5
+              }
+            },
+            {
+              "title": "1. Introduction",
+              "role": "introduction",
+              "pages": [
+                1,
+                2
+              ],
+              "score": 69.28,
+              "confidence": 0.6105,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 85.5,
+                "rigor": 55.75,
+                "support": 69.0,
+                "completeness": 79.75
+              }
+            },
+            {
+              "title": "2. Definitions",
+              "role": "related_work",
+              "pages": [
+                2,
+                3
+              ],
+              "score": 74.92,
+              "confidence": 0.2745,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 88.25,
+                "rigor": 80.5,
+                "support": 73.0,
+                "completeness": 48.0
+              }
+            },
+            {
+              "title": "3. Observing Miscalibration",
+              "role": "other",
+              "pages": [
+                3,
+                4
+              ],
+              "score": 68.09,
+              "confidence": 0.706,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 78.25,
+                "rigor": 55.75,
+                "support": 74.5,
+                "completeness": 70.5
+              }
+            },
+            {
+              "title": "4. Calibration Methods",
+              "role": "methods",
+              "pages": [
+                4,
+                4
+              ],
+              "score": 57.61,
+              "confidence": 0.394,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 84.25,
+                "rigor": 69.0,
+                "support": 36.5,
+                "completeness": 37.75
+              }
+            },
+            {
+              "title": "4.1. Calibrating Binary Models",
+              "role": "methods",
+              "pages": [
+                4,
+                5
+              ],
+              "score": 78.35,
+              "confidence": 0.5125,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 94.25,
+                "rigor": 76.25,
+                "support": 73.5,
+                "completeness": 71.75
+              }
+            },
+            {
+              "title": "4.2. Extension to Multiclass Models",
+              "role": "methods",
+              "pages": [
+                5,
+                6
+              ],
+              "score": 65.99,
+              "confidence": 0.4295,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 71.25,
+                "rigor": 65.0,
+                "support": 61.25,
+                "completeness": 70.75
+              }
+            },
+            {
+              "title": "4.3. Other Related Works",
+              "role": "related_work",
+              "pages": [
+                6,
+                7
+              ],
+              "score": 69.06,
+              "confidence": 0.438,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 76.25,
+                "rigor": 62.25,
+                "support": 68.5,
+                "completeness": 76.5
+              }
+            },
+            {
+              "title": "5. Results",
+              "role": "results",
+              "pages": [
+                7,
+                8
+              ],
+              "score": 71.47,
+              "confidence": 0.591,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 85.0,
+                "rigor": 62.75,
+                "support": 75.75,
+                "completeness": 65.25
+              }
+            },
+            {
+              "title": "6. Conclusion",
+              "role": "conclusion",
+              "pages": [
+                8,
+                8
+              ],
+              "score": 62.83,
+              "confidence": 0.486,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 79.75,
+                "rigor": 59.25,
+                "support": 56.5,
+                "completeness": 61.25
+              }
+            },
+            {
+              "title": "Acknowledgments",
+              "role": "other",
+              "pages": [
+                9,
+                9
+              ],
+              "score": 50.44,
+              "confidence": 0.501,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 94.0,
+                "rigor": 7.25,
+                "support": 54.5,
+                "completeness": 85.0
+              }
+            },
+            {
+              "title": "References",
+              "role": "references",
+              "pages": [
+                9,
+                10
+              ],
+              "score": 60.59,
+              "confidence": 0.311,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 91.25,
+                "rigor": 23.25,
+                "support": 72.0,
+                "completeness": 84.0
+              }
+            },
+            {
+              "title": "S1. Further Information on Calibration Metrics",
+              "role": "appendix",
+              "pages": [
+                11,
+                11
+              ],
+              "score": 61.18,
+              "confidence": 0.41,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 63.25,
+                "rigor": 57.0,
+                "support": 59.75,
+                "completeness": 71.0
+              }
+            },
+            {
+              "title": "S2. Further Information on Temperature Scaling",
+              "role": "appendix",
+              "pages": [
+                11,
+                11
+              ],
+              "score": 54.27,
+              "confidence": 0.374,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 52.75,
+                "rigor": 39.0,
+                "support": 68.0,
+                "completeness": 64.5
+              }
+            },
+            {
+              "title": "S3. Additional Tables",
+              "role": "appendix",
+              "pages": [
+                11,
+                12
+              ],
+              "score": 52.76,
+              "confidence": 0.3645,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 53.75,
+                "rigor": 36.25,
+                "support": 70.75,
+                "completeness": 54.0
+              }
+            },
+            {
+              "title": "S4. Additional Reliability Diagrams",
+              "role": "appendix",
+              "pages": [
+                12,
+                14
+              ],
+              "score": 65.8,
+              "confidence": 0.3245,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 73.0,
+                "rigor": 43.0,
+                "support": 86.0,
+                "completeness": 69.0
+              }
+            }
+          ]
+        },
+        {
+          "review_id": "0682884c-59f4-432c-924e-0b4ca1832559",
+          "score": 68.6,
+          "confidence": 0.502,
+          "decision": "Major revisions suggested",
+          "first_section_ms": 356.4,
+          "total_ms": 1222.6,
+          "server_elapsed_ms": 1217,
+          "events": [
+            {
+              "type": "status",
+              "elapsed_ms": 7.2
+            },
+            {
+              "type": "paper",
+              "elapsed_ms": 102.1
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 356.4
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 377.0
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 447.3
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 539.1
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 613.3
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 637.7
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 697.5
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 773.5
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 820.9
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 875.9
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 904.6
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 1011.0
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 1025.8
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 1058.1
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 1170.6
+            },
+            {
+              "type": "section_result",
+              "elapsed_ms": 1222.2
+            },
+            {
+              "type": "complete",
+              "elapsed_ms": 1222.6
+            }
+          ],
+          "input_tokens": 43248,
+          "output_tokens": 976,
+          "section_results": [
+            {
+              "title": "Abstract",
+              "role": "abstract",
+              "pages": [
+                1,
+                1
+              ],
+              "score": 57.48,
+              "confidence": 0.515,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 85.5,
+                "rigor": 47.0,
+                "support": 44.0,
+                "completeness": 71.5
+              }
+            },
+            {
+              "title": "1. Introduction",
+              "role": "introduction",
+              "pages": [
+                1,
+                2
+              ],
+              "score": 69.5,
+              "confidence": 0.6155,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 85.75,
+                "rigor": 55.5,
+                "support": 69.5,
+                "completeness": 80.5
+              }
+            },
+            {
+              "title": "2. Definitions",
+              "role": "related_work",
+              "pages": [
+                2,
+                3
+              ],
+              "score": 75.88,
+              "confidence": 0.269,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 88.0,
+                "rigor": 80.25,
+                "support": 73.0,
+                "completeness": 55.25
+              }
+            },
+            {
+              "title": "3. Observing Miscalibration",
+              "role": "other",
+              "pages": [
+                3,
+                4
+              ],
+              "score": 68.46,
+              "confidence": 0.7035,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 79.0,
+                "rigor": 55.75,
+                "support": 75.25,
+                "completeness": 70.5
+              }
+            },
+            {
+              "title": "4. Calibration Methods",
+              "role": "methods",
+              "pages": [
+                4,
+                4
+              ],
+              "score": 56.08,
+              "confidence": 0.4275,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 84.5,
+                "rigor": 68.75,
+                "support": 32.5,
+                "completeness": 35.75
+              }
+            },
+            {
+              "title": "4.1. Calibrating Binary Models",
+              "role": "methods",
+              "pages": [
+                4,
+                5
+              ],
+              "score": 78.95,
+              "confidence": 0.463,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 94.75,
+                "rigor": 76.5,
+                "support": 75.25,
+                "completeness": 71.0
+              }
+            },
+            {
+              "title": "4.2. Extension to Multiclass Models",
+              "role": "methods",
+              "pages": [
+                5,
+                6
+              ],
+              "score": 64.01,
+              "confidence": 0.382,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 70.25,
+                "rigor": 61.75,
+                "support": 59.25,
+                "completeness": 70.5
+              }
+            },
+            {
+              "title": "4.3. Other Related Works",
+              "role": "related_work",
+              "pages": [
+                6,
+                7
+              ],
+              "score": 69.49,
+              "confidence": 0.4325,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 76.75,
+                "rigor": 62.75,
+                "support": 68.75,
+                "completeness": 77.0
+              }
+            },
+            {
+              "title": "5. Results",
+              "role": "results",
+              "pages": [
+                7,
+                8
+              ],
+              "score": 70.61,
+              "confidence": 0.586,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 84.5,
+                "rigor": 62.5,
+                "support": 73.5,
+                "completeness": 65.25
+              }
+            },
+            {
+              "title": "6. Conclusion",
+              "role": "conclusion",
+              "pages": [
+                8,
+                8
+              ],
+              "score": 62.64,
+              "confidence": 0.493,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 79.5,
+                "rigor": 58.75,
+                "support": 56.0,
+                "completeness": 62.5
+              }
+            },
+            {
+              "title": "Acknowledgments",
+              "role": "other",
+              "pages": [
+                9,
+                9
+              ],
+              "score": 51.1,
+              "confidence": 0.5155,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 94.25,
+                "rigor": 6.75,
+                "support": 56.25,
+                "completeness": 86.75
+              }
+            },
+            {
+              "title": "References",
+              "role": "references",
+              "pages": [
+                9,
+                10
+              ],
+              "score": 59.74,
+              "confidence": 0.339,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 90.25,
+                "rigor": 21.5,
+                "support": 72.25,
+                "completeness": 83.25
+              }
+            },
+            {
+              "title": "S1. Further Information on Calibration Metrics",
+              "role": "appendix",
+              "pages": [
+                11,
+                11
+              ],
+              "score": 60.88,
+              "confidence": 0.433,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 62.25,
+                "rigor": 56.5,
+                "support": 60.0,
+                "completeness": 71.0
+              }
+            },
+            {
+              "title": "S2. Further Information on Temperature Scaling",
+              "role": "appendix",
+              "pages": [
+                11,
+                11
+              ],
+              "score": 53.75,
+              "confidence": 0.369,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 52.75,
+                "rigor": 38.25,
+                "support": 67.0,
+                "completeness": 64.75
+              }
+            },
+            {
+              "title": "S3. Additional Tables",
+              "role": "appendix",
+              "pages": [
+                11,
+                12
+              ],
+              "score": 53.82,
+              "confidence": 0.3565,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 54.0,
+                "rigor": 37.0,
+                "support": 73.5,
+                "completeness": 53.5
+              }
+            },
+            {
+              "title": "S4. Additional Reliability Diagrams",
+              "role": "appendix",
+              "pages": [
+                12,
+                14
+              ],
+              "score": 66.44,
+              "confidence": 0.3205,
+              "chunks": 1,
+              "dimensions": {
+                "clarity": 73.5,
+                "rigor": 44.0,
+                "support": 86.0,
+                "completeness": 70.25
+              }
+            }
+          ]
+        }
+      ],
+      "mean_score": 68.76666666666667,
+      "score_stdev": 0.15275252316519994,
+      "mean_first_section_ms": 392.8666666666667,
+      "mean_total_ms": 1240.2666666666667
+    }
+  ]
+}

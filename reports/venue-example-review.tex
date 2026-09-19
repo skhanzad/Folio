@@ -1,0 +1,171 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs,longtable,microtype,hyperref}
+\hypersetup{hidelinks}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlength{\emergencystretch}{3em}
+\title{Folio: Manuscript Assessment}
+\author{Jev-assisted review}
+\date{2026-09-19}
+\begin{document}
+\maketitle
+\section{Manuscript}
+Uncertainty-aware document classification
+\par File: \texttt{structured-synthetic.pdf}
+\par Review ID: \texttt{f83219bd-01f8-48c9-a504-dc7123a695eb}
+\par SHA-256: \texttt{30bfd350be4f8c13c927a36e4367c3d2}\allowbreak\texttt{c6644f6e66aa198fce2629893e97796a}
+Pages: 3. Review units: 8. Profile: research.
+\section{Overall assessment}
+Score: 77.4/100. Recommendation: Promising ; minor revisions.
+Review status: Complete. Mean model confidence: 50.0\%.
+\section{Method}
+Each passage is evaluated on five five-level Jev Score questions. Scores are mapped from [0,4] to [0,100]. Clarity contributes 16\%, rigor 28\%, evidence 24\%, completeness 12\%, and venue fit 20\%. Long-section passage scores are weighted by character count. Section weights are fixed by role and divided within a role by word count. Mean confidence describes concentration of model outputs, not the probability that the paper is correct. Findings and suggestions below are rubric-derived templates, not generated expert explanations. Source excerpts are context, not verified rationales.
+\section{Section scores}
+\begin{longtable}{p{.44\textwidth}rrrr}
+\toprule Section & Pages & Score & Conf. & Weight \\ \midrule\endhead
+Abstract & 1--1 & 82.9 & 55\% & 5.0\% \\
+1 Introduction & 1--1 & 72.6 & 40\% & 10.0\% \\
+2 Related Work & 1--1 & 75.1 & 43\% & 10.0\% \\
+3 Methods & 2--2 & 85.9 & 62\% & 25.0\% \\
+4 Results & 2--2 & 66.2 & 41\% & 25.0\% \\
+5 Discussion and Limitations & 2--2 & 86.8 & 56\% & 12.0\% \\
+6 Conclusion & 2--2 & 82.6 & 56\% & 8.0\% \\
+References & 3--3 & 69.4 & 39\% & 5.0\% \\
+\bottomrule\end{longtable}
+\section{Target venue and website grounding}
+\textbf{NeurIPS 2026}
+\par Supplied website: \url{https://neurips.cc/Conferences/2026/ReviewerGuidelines}
+\par Track/category: General
+\par Retrieved website passages inform all criteria. Venue fit contributes 20\% to the overall score. These are Folio's application weights, not the venue's official scale or an estimate of acceptance probability. The JSON export contains all selected passages.
+\subsection*{2026 Reviewer Guidelines}
+\url{https://neurips.cc/Conferences/2026/ReviewerGuidelines}
+\par Retrieved: 2026-09-19T13:41:45.828780+00:00
+\par Source SHA-256: \texttt{d7a667d7d1268b3976635ff5b912406d}\allowbreak\texttt{fcee92baba40a671777fa6c04c11d334}
+\begin{quote}\small General Reviewing Guidelines / Quality: Is the submission technically sound? Are claims well supported (e.g., by theoretical analysis or experimental results)? Are the methods used ...\end{quote}
+\section{Detailed findings}
+\subsection{Abstract}
+\par\textbf{Clarity (88.0/100):} Precise definitions and coherent organization make the meaning unambiguous.
+\par\textbf{Rigor (85.0/100):} The reasoning is well justified with explicit assumptions and minor gaps.
+\par\textbf{Evidence (86.2/100):} Central claims have specific relevant support with small omissions.
+\par\textbf{Completeness (88.2/100):} The section's purpose is fully addressed with the details a critical reader needs.
+\par\textbf{Venue fit (68.8/100):} The contribution aligns with the venue's documented scope and addresses the applicable scientific review priorities.
+\par Revision prompt: Make the contribution's connection to the cited venue scope and applicable review priorities explicit.
+\begin{quote}\small We study whether explicit uncertainty reporting improves the interpretability of a small
+document-classification system. In this synthetic demonstration, a logistic regression baseline is
+compared with temperature-scaled predictions on a fixed, balanced collection of 600 generated
+abstracts. We report held-out accuracy and calibration error over five random seeds. Calibration
+improves while accuracy is unchanged within sampling variation. These illustrative results describe a
+controlled toy setting; they do not establish performance on real sch\end{quote}
+Passages evaluated: 1. Model: jev-1.13.0.
+\subsection{1 Introduction}
+\par\textbf{Clarity (86.5/100):} The argument is easy to follow with only minor ambiguity.
+\par\textbf{Rigor (85.2/100):} The reasoning is well justified with explicit assumptions and minor gaps.
+\par\textbf{Evidence (50.8/100):} Some relevant support is provided but a central claim remains insufficiently supported.
+\par Revision prompt: Connect each central claim to a specific result, derivation, or relevant citation.
+\par\textbf{Completeness (79.2/100):} The necessary details are present with only minor omissions.
+\par\textbf{Venue fit (66.0/100):} The contribution aligns with the venue's documented scope and addresses the applicable scientific review priorities.
+\par Revision prompt: Make the contribution's connection to the cited venue scope and applicable review priorities explicit.
+\begin{quote}\small Automated document triage often exposes a class label without the uncertainty behind it. Readers may
+mistake a confident prediction for a reliable one. Our research question is whether a simple
+post-processing calibration step can improve the match between prediction confidence and observed
+accuracy without changing the classifier. The contribution is a small, reproducible evaluation protocol
+separating training, calibration, and testing. This original synthetic manuscript is a software
+demonstration and is not a published scientific study.\end{quote}
+Passages evaluated: 1. Model: jev-1.13.0.
+\subsection{2 Related Work}
+\par\textbf{Clarity (84.5/100):} The argument is easy to follow with only minor ambiguity.
+\par\textbf{Rigor (80.8/100):} The reasoning is well justified with explicit assumptions and minor gaps.
+\par\textbf{Evidence (71.5/100):} Central claims have specific relevant support with small omissions.
+\par Revision prompt: Connect each central claim to a specific result, derivation, or relevant citation.
+\par\textbf{Completeness (54.5/100):} The main information is present but an important detail is missing.
+\par Revision prompt: Add the missing details a reader would need to assess this section independently.
+\par\textbf{Venue fit (76.5/100):} The contribution aligns with the venue's documented scope and addresses the applicable scientific review priorities.
+\begin{quote}\small Proper scoring rules formalize evaluation of probabilistic predictions [1]. Calibration methods adjust
+confidence estimates while preserving a predictor's ranking, with temperature scaling providing a simple
+example [2]. Our protocol uses these established ideas rather than claiming a new calibration algorithm.
+A broader comparison with isotonic regression would help establish whether the chosen baseline is
+appropriate; that comparison is left for future work.
+Folio / illustrative manuscript                                      1\end{quote}
+Passages evaluated: 1. Model: jev-1.13.0.
+\subsection{3 Methods}
+\par\textbf{Clarity (94.8/100):} Precise definitions and coherent organization make the meaning unambiguous.
+\par\textbf{Rigor (89.8/100):} The reasoning is internally sound and its assumptions and inference boundaries are explicit.
+\par\textbf{Evidence (84.5/100):} Central claims have specific relevant support with small omissions.
+\par\textbf{Completeness (77.2/100):} The necessary details are present with only minor omissions.
+\par\textbf{Venue fit (80.2/100):} The contribution aligns with the venue's documented scope and addresses the applicable scientific review priorities.
+\begin{quote}\small We construct 600 synthetic abstracts balanced across three topic classes. A fixed stratified split
+allocates 360 abstracts to training, 120 to calibration, and 120 to testing. A TF-IDF representation with
+unigrams and bigrams feeds a multinomial logistic regression with L2 regularization and C=1.
+Vocabulary construction uses training data only. Temperature is selected on the calibration split by
+minimizing negative log likelihood. The held-out test split is never used for model or temperature
+selection. We repeat the procedure for random seeds \end{quote}
+Passages evaluated: 1. Model: jev-1.13.0.
+\subsection{4 Results}
+\par\textbf{Clarity (93.5/100):} Precise definitions and coherent organization make the meaning unambiguous.
+\par\textbf{Rigor (85.0/100):} The reasoning is well justified with explicit assumptions and minor gaps.
+\par\textbf{Evidence (58.2/100):} Some relevant support is provided but a central claim remains insufficiently supported.
+\par Revision prompt: Connect each central claim to a specific result, derivation, or relevant citation.
+\par\textbf{Completeness (57.5/100):} The main information is present but an important detail is missing.
+\par Revision prompt: Add the missing details a reader would need to assess this section independently.
+\par\textbf{Venue fit (32.8/100):} The connection to the documented venue scope is weak and major scientific priorities are unaddressed.
+\par Revision prompt: Make the contribution's connection to the cited venue scope and applicable review priorities explicit.
+\begin{quote}\small In this synthetic example, the baseline achieves 81.2\% accuracy with a standard deviation of 1.8
+percentage points across seeds. Temperature scaling achieves the same accuracy, as expected
+because it preserves the maximal-logit class. Mean expected calibration error decreases from 0.142 to
+0.061; standard deviations are 0.024 and 0.018 respectively. These numbers are illustrative fixture
+values, not outputs of a conducted experiment. No statistical significance or real-world improvement is
+claimed. A seed-level result table and confidence inter\end{quote}
+Passages evaluated: 1. Model: jev-1.13.0.
+\subsection{5 Discussion and Limitations}
+\par\textbf{Clarity (87.8/100):} Precise definitions and coherent organization make the meaning unambiguous.
+\par\textbf{Rigor (93.8/100):} The reasoning is internally sound and its assumptions and inference boundaries are explicit.
+\par\textbf{Evidence (78.8/100):} Central claims have specific relevant support with small omissions.
+\par\textbf{Completeness (91.5/100):} The section's purpose is fully addressed with the details a critical reader needs.
+\par\textbf{Venue fit (83.2/100):} The contribution aligns with the venue's documented scope and addresses the applicable scientific review priorities.
+\begin{quote}\small The protocol illustrates why discrimination and calibration should be reported separately. The apparent
+calibration benefit applies only to the constructed distribution and should not be generalized to natural
+abstracts. Generated text can encode label shortcuts, a small test split makes bin-based calibration
+estimates unstable, and the experiment does not test distribution shift. The absence of executed
+experiments is a central limitation of this demonstration. Future work should use independently
+annotated documents, report inter-annotator ag\end{quote}
+Passages evaluated: 1. Model: jev-1.13.0.
+\subsection{6 Conclusion}
+\par\textbf{Clarity (83.0/100):} The argument is easy to follow with only minor ambiguity.
+\par\textbf{Rigor (95.8/100):} The reasoning is internally sound and its assumptions and inference boundaries are explicit.
+\par\textbf{Evidence (81.8/100):} Central claims have specific relevant support with small omissions.
+\par\textbf{Completeness (75.5/100):} The necessary details are present with only minor omissions.
+\par\textbf{Venue fit (69.0/100):} The contribution aligns with the venue's documented scope and addresses the applicable scientific review priorities.
+\par Revision prompt: Make the contribution's connection to the cited venue scope and applicable review priorities explicit.
+\begin{quote}\small We describe a transparent protocol for separating classifier accuracy from calibration quality. The
+synthetic values make the interface easy to inspect but supply no empirical evidence for deployment. A
+substantive contribution would require execution of the protocol on real documents, external replication,
+and careful analysis of uncertainty. Explicit scope and limitations are essential when presenting
+model-based assessments.
+Folio / illustrative manuscript                                      2\end{quote}
+Passages evaluated: 1. Model: jev-1.13.0.
+\subsection{References}
+\par\textbf{Clarity (93.5/100):} Precise definitions and coherent organization make the meaning unambiguous.
+\par\textbf{Rigor (32.5/100):} Central assumptions are unexamined and major inferential gaps remain.
+\par Revision prompt: State the assumptions and justify the inferential steps that connect evidence to claims.
+\par\textbf{Evidence (82.0/100):} Central claims have specific relevant support with small omissions.
+\par\textbf{Completeness (87.5/100):} The section's purpose is fully addressed with the details a critical reader needs.
+\par\textbf{Venue fit (75.8/100):} The contribution aligns with the venue's documented scope and addresses the applicable scientific review priorities.
+\begin{quote}\small [1] Gneiting, T. and Raftery, A. E. (2007). Strictly proper scoring rules, prediction, and estimation. Journal
+of the American Statistical Association, 102(477), 359-378.
+[2] Guo, C., Pleiss, G., Sun, Y., and Weinberger, K. Q. (2017). On Calibration of Modern Neural
+Networks. Proceedings of ICML, PMLR 70, 1321-1330.
+Folio / illustrative manuscript                                      3\end{quote}
+Passages evaluated: 1. Model: jev-1.13.0.
+\section{Limitations and provenance}
+\begin{itemize}
+\item Grounded in retrieved guidance for NeurIPS 2026, track: General. Venue fit contributes 20\%; the other rubric dimensions contribute 80\%. These application weights are not the venue's official rating scale or acceptance probability.
+\item Grounding uses selected passages from the supplied site, not an exhaustive policy or submission-compliance check.
+\item This is a rubric-based assessment of extracted text, not a peer-review verdict. Figures, mathematical correctness, citation validity, and novelty require expert verification.
+\item Recommendation thresholds and weights are design choices and have not been calibrated against expert review outcomes.
+\item Non-ASCII characters are transliterated or replaced in this portable LaTeX export; use JSON for exact text.
+\end{itemize}
+Rubric: folio-1.1. Time: 1.28 seconds. Input tokens: 21518; output tokens: 600.
+\par API documentation: \url{https://docs.typesafe.ai/primitives/score}
+\end{document}
