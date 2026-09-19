@@ -10,7 +10,8 @@
     "start": "uv run uvicorn server.app:app --host 127.0.0.1 --port 8000",
     "test": "uv run pytest -q",
     "test:e2e": "playwright test",
-    "report": "latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=reports reports/findings.tex"
+    "report": "latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=reports reports/findings.tex",
+    "report:iclr": "latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=reports reports/iclr2026-findings.tex"
   },
   "dependencies": {
     "@fontsource/dm-sans": "^5.2.5",

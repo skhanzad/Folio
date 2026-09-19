@@ -14,6 +14,46 @@ export interface VenueSource {
 export interface VenueContext extends VenueRequest {
   sources: VenueSource[];
   warnings: string[];
+  openreview_id?: string;
+}
+export interface DecisionBand {
+  minimum: number;
+  maximum: number;
+  label: string;
+}
+export interface StudyMetrics {
+  accuracy: number;
+  balanced_accuracy: number;
+  roc_auc: number;
+  brier: number;
+  log_loss: number;
+  confusion_matrix: number[][];
+  bootstrap_95_ci?: Record<string, number[]>;
+}
+export interface StudyCounts {
+  total: number;
+  accepted: number;
+  rejected: number;
+}
+export interface AcceptancePrediction {
+  status: "ready" | "unavailable";
+  reason?: string;
+  label?: string;
+  binary_prediction?: "Accept" | "Reject";
+  acceptance_probability?: number;
+  model_id?: string;
+  venue_id?: string;
+  bands: DecisionBand[];
+  counts?: Record<string, StudyCounts>;
+  metrics?: StudyMetrics;
+  baseline?: StudyMetrics;
+  limitations?: string[];
+  known_paper?: { forum_id: string; split: string; decision: string } | null;
+}
+export interface ResearchStudy extends AcceptancePrediction {
+  sources?: { url: string; revision: string }[];
+  trained_at?: string;
+  cohort?: string;
 }
 export interface Section {
   id: string;
@@ -78,6 +118,7 @@ export interface Report {
   input_tokens: number;
   output_tokens: number;
   venue?: VenueContext | null;
+  prediction?: AcceptancePrediction | null;
 }
 export interface ReviewState {
   status:

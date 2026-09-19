@@ -14,12 +14,13 @@ const file = {
   buffer: Buffer.from("%PDF-1.7 fixture"),
 };
 const venue: VenueContext = {
-  name: "NeurIPS 2026",
-  website: "https://neurips.cc/Conferences/2026/ReviewerGuidelines",
-  track: "General",
+  name: "ICLR 2026",
+  website: "https://openreview.net/group?id=ICLR.cc/2026/Conference",
+  openreview_id: "ICLR.cc/2026/Conference",
+  track: "Main conference",
   sources: [
     {
-      url: "https://neurips.cc/Conferences/2026/ReviewerGuidelines",
+      url: "https://iclr.cc/Conferences/2026/ReviewerGuide",
       title: "Fixture reviewer guidelines",
       retrieved_at: "2026-09-19T12:00:00+00:00",
       sha256: "a".repeat(64),
@@ -34,7 +35,7 @@ const venue: VenueContext = {
 function eventsFor(target: VenueContext, revision: number) {
   const report = structuredClone(fixture);
   report.review_id = `venue-review-${revision}`;
-  report.rubric_version = "folio-1.1";
+  report.rubric_version = "folio-2.0";
   report.venue = structuredClone(target);
   report.results = report.results.map((result) => ({
     ...result,
@@ -76,7 +77,7 @@ function eventsFor(target: VenueContext, revision: number) {
 async function expectDefaultVenue(page: Page) {
   await expect(
     page.getByLabel("Target venue", { exact: true }).locator("option:checked"),
-  ).toHaveText("NeurIPS 2026");
+  ).toHaveText("ICLR 2026");
   await expect(page.getByLabel("Venue name & edition")).toHaveValue(venue.name);
   await expect(
     page.getByLabel("Official website or review guidelines"),
@@ -136,7 +137,7 @@ test("venue guidance is inspectable, accessible, used on each upload and exporte
       (body) =>
         body.includes('name="venue_website"') &&
         body.includes(venue.website) &&
-        body.includes("NeurIPS 2026"),
+        body.includes("ICLR 2026"),
     ),
   ).toBe(true);
   await expect(page.locator(".dimension-cards > *")).toHaveCount(5);
@@ -164,7 +165,7 @@ test("venue guidance is inspectable, accessible, used on each upload and exporte
   await page.getByRole("button", { name: "Export LaTeX" }).click();
   const tex = await readFile((await (await downloaded).path())!, "utf8");
   expect(tex).toContain("Target venue and website grounding");
-  expect(tex).toContain("NeurIPS 2026");
+  expect(tex).toContain("ICLR 2026");
   expect(tex).toContain(venue.sources[0].sha256.slice(0, 32));
 });
 
@@ -203,7 +204,7 @@ test("changing venues starts a fresh assessment and history retains original sou
     name: "Venue sources used in this review",
     exact: true,
   });
-  await expect(sources).toContainText("NeurIPS 2026");
+  await expect(sources).toContainText("ICLR 2026");
   await page.getByRole("button", { name: "Review for this venue" }).click();
   await expect(sources).toContainText("Journal of Research");
   expect(requests).toBe(2);
@@ -213,11 +214,8 @@ test("changing venues starts a fresh assessment and history retains original sou
   });
   if (await menu.isVisible()) await menu.click();
   await page.getByRole("button", { name: /Review history/ }).click();
-  await page
-    .locator(".history-card")
-    .filter({ hasText: "NeurIPS 2026" })
-    .click();
-  await expect(sources).toContainText("NeurIPS 2026");
+  await page.locator(".history-card").filter({ hasText: "ICLR 2026" }).click();
+  await expect(sources).toContainText("ICLR 2026");
   await page.getByText("Change target venue", { exact: true }).click();
   await expect(
     page.getByLabel("Official website or review guidelines"),

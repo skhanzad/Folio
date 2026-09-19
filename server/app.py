@@ -18,6 +18,7 @@ from .export import latex_report
 from .jev import JevClient, JevError
 from .models import ReviewReport, VenueRequest
 from .pdf import PDFError, extract_pdf
+from .prediction import model_summary, predict_acceptance
 from .rubric import PROFILES, RUBRIC_VERSION, rubric_metadata, summarize
 from .sample import sample_pdf
 from .venue import PRESETS, VenueError, load_venue
@@ -73,6 +74,20 @@ def rubric():
 @app.get("/api/venues")
 def venues():
     return {"presets": PRESETS}
+
+
+@app.get("/api/research")
+def research():
+    return model_summary()
+
+
+@app.get("/api/research/papers")
+def research_papers():
+    path = ROOT / "reports/iclr2026-study.json"
+    if not path.exists():
+        return {"papers": []}
+    study = json.loads(path.read_text())
+    return {"papers": study["papers"]}
 
 
 @app.post("/api/venue")
@@ -216,6 +231,7 @@ async def review(
                 input_tokens=client.input_tokens,
                 output_tokens=client.output_tokens,
                 venue=venue,
+                prediction=predict_acceptance(paper, results, venue, profile, RUBRIC_VERSION),
             )
             yield event("complete", report=report.model_dump())
         except (PDFError, VenueError) as exc:

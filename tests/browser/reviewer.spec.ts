@@ -116,7 +116,7 @@ test("uploads, scores every section, exposes distributions, and exports real LaT
   await expect(page.getByText("Level 4", { exact: true })).toBeVisible();
   await page.getByRole("tab", { name: "Extracted manuscript" }).click();
   await expect(
-    page.getByText("This is the text used for evaluation.", { exact: false }),
+    page.getByText("This is the extracted text.", { exact: false }),
   ).toBeVisible();
   const downloadPromise = page.waitForEvent("download");
   await page.getByRole("button", { name: "Export LaTeX" }).click();

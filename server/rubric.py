@@ -4,7 +4,15 @@ from collections import defaultdict
 
 from .models import Paper, SectionResult, Summary, VenueContext
 
-RUBRIC_VERSION = "folio-1.1"
+RUBRIC_VERSION = "folio-2.0"
+THRESHOLDS = [
+    {"minimum": 85, "label": "Strong accept"},
+    {"minimum": 70, "label": "Accept"},
+    {"minimum": 55, "label": "Weak accept"},
+    {"minimum": 45, "label": "Weak reject"},
+    {"minimum": 25, "label": "Reject"},
+    {"minimum": 0, "label": "Strong reject"},
+]
 DIMENSIONS = {
     "clarity": {
         "label": "Clarity",
@@ -186,19 +194,12 @@ def summarize(
         )
     if not complete:
         decision = "Review in progress"
-    elif confidence is not None and confidence < 0.45:
-        decision = "Expert review needed"
-        notes.append(
-            "Mean model confidence is below 45%; the application abstains from a quality recommendation."
-        )
-    elif score is not None and score >= 85:
-        decision = "Strong submission"
-    elif score is not None and score >= 70:
-        decision = "Promising · minor revisions"
-    elif score is not None and score >= 55:
-        decision = "Major revisions suggested"
     else:
-        decision = "Needs substantial work"
+        decision = next(t["label"] for t in THRESHOLDS if (score or 0) >= t["minimum"])
+    if confidence is not None and confidence < 0.45:
+        notes.append(
+            "Mean Jev confidence is below 45%; inspect the distributions and seek expert review before relying on this assessment."
+        )
     ranked = sorted(
         [(d.score, by_id[r.section_id].title, d) for r in results for d in r.dimensions],
         key=lambda item: item[0],
@@ -228,11 +229,6 @@ def rubric_metadata() -> dict:
         "role_weights": ROLE_WEIGHTS,
         "purposes": PURPOSES,
         "profiles": PROFILES,
-        "thresholds": [
-            {"minimum": 85, "label": "Strong submission"},
-            {"minimum": 70, "label": "Promising · minor revisions"},
-            {"minimum": 55, "label": "Major revisions suggested"},
-            {"minimum": 0, "label": "Needs substantial work"},
-        ],
+        "thresholds": THRESHOLDS,
         "confidence_floor": 0.45,
     }

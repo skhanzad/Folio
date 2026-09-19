@@ -11,10 +11,15 @@ dependencies = [
   "python-multipart>=0.0.20,<1",
   "python-dotenv>=1.0,<2",
   "beautifulsoup4>=4.13,<5",
+  "scikit-learn>=1.6,<2",
 ]
 
 [dependency-groups]
-dev = ["pytest>=8,<10", "pytest-asyncio>=0.25,<2", "ruff>=0.11,<1"]
+dev = [
+    "pytest>=8,<10",
+    "pytest-asyncio>=0.25,<2",
+    "ruff>=0.11,<1",
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

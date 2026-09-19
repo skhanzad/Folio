@@ -58,7 +58,7 @@ def latex_report(report: ReviewReport) -> str:
         + "}",
         f"Pages: {report.paper.pages}. Review units: {len(report.paper.sections)}. Profile: {tex(report.profile)}.",
         r"\section{Overall assessment}",
-        f"Score: {summary.score if summary.score is not None else 'Unavailable'}/100. Recommendation: {tex(summary.decision)}.",
+        f"Rubric score: {summary.score if summary.score is not None else 'Unavailable'}/100. Rubric recommendation: {tex(summary.decision)}.",
         f"Review status: {'Complete' if summary.complete else 'Incomplete; no final recommendation'}. Mean model confidence: {(summary.confidence or 0) * 100:.1f}\\%.",
         r"\section{Method}",
         (
@@ -80,6 +80,39 @@ def latex_report(report: ReviewReport) -> str:
         )
         lines[-1] += "\\"
     lines.extend([r"\bottomrule\end{longtable}", r"\section{Detailed findings}"])
+    if report.prediction:
+        prediction = report.prediction
+        assessment = [r"\section{Acceptance prediction}"]
+        if prediction.get("status") == "ready":
+            assessment += [
+                r"\textbf{" + tex(prediction.get("label", "")) + "}",
+                f"Estimated acceptance probability in the pilot cohort: {float(prediction['acceptance_probability']) * 100:.1f}\\%. Binary prediction: {tex(prediction.get('binary_prediction', ''))}.",
+                r"\par This is a trained classifier of Jev outputs, fitted to archived final accept/reject decisions. The six labels are probability bands, not six ground-truth classes.",
+                r"\par Model: \texttt{" + tex(prediction.get("model_id", "")) + "}.",
+            ]
+            metrics = prediction.get("metrics", {})
+            assessment.append(
+                f"Held-out accuracy: {float(metrics.get('accuracy', 0)) * 100:.1f}\\%; AUROC: {float(metrics.get('roc_auc', 0)):.3f}; Brier score: {float(metrics.get('brier', 0)):.3f}."
+            )
+            if prediction.get("known_paper"):
+                known = prediction["known_paper"]
+                assessment.append(
+                    f"This manuscript is in the {tex(known['split'])} split. Its observed decision is {tex(known['decision'])}; this decision was not an input to Jev."
+                )
+                if known["split"] in ("train", "calibration"):
+                    assessment.append(
+                        "This manuscript contributed to fitting or calibration; its prediction is not an independent test."
+                    )
+            assessment.extend(
+                [
+                    r"\begin{itemize}",
+                    *[r"\item " + tex(note) for note in prediction.get("limitations", [])],
+                    r"\end{itemize}",
+                ]
+            )
+        else:
+            assessment.append(tex(prediction.get("reason", "No trained acceptance prediction is available.")))
+        lines[-1:-1] = assessment
     if report.venue:
         grounding = [
             r"\section{Target venue and website grounding}",
@@ -101,9 +134,7 @@ def latex_report(report: ReviewReport) -> str:
                     + r"}\allowbreak\texttt{"
                     + tex(source.sha256[32:])
                     + "}",
-                    r"\begin{quote}\small "
-                    + tex(excerpt)
-                    + r"\end{quote}",
+                    r"\begin{quote}\small " + tex(excerpt) + r"\end{quote}",
                 ]
             )
         # Put source provenance before the detailed section feedback.
@@ -125,7 +156,7 @@ def latex_report(report: ReviewReport) -> str:
     lines.extend(r"\item " + tex(note) for note in summary.notes)
     lines.extend(
         [
-            r"\item Recommendation thresholds and weights are design choices and have not been calibrated against expert review outcomes.",
+            r"\item The manuscript rubric weights and thresholds are design choices. Any separate acceptance estimate uses the labeled study and limitations reported above.",
             r"\item Non-ASCII characters are transliterated or replaced in this portable LaTeX export; use JSON for exact text.",
             r"\end{itemize}",
             (

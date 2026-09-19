@@ -67,20 +67,29 @@ def test_subdividing_a_role_does_not_increase_its_weight():
     assert summary.section_weights == {"s0": 0.25, "s1": 0.25, "s2": 0.5}
 
 
-def test_low_confidence_abstains_despite_high_score():
+def test_low_confidence_flags_uncertainty_without_inventing_a_seventh_band():
     paper = paper_with("methods")
     result = summarize(paper, [result_for(paper.sections[0], 100, 0.2)], True)
     assert result.score == 100
-    assert result.decision == "Expert review needed"
+    assert result.decision == "Strong accept"
+    assert any("confidence" in note.lower() for note in result.notes)
 
 
 @pytest.mark.parametrize(
     "score,expected",
     [
-        (85, "Strong submission"),
-        (70, "Promising · minor revisions"),
-        (55, "Major revisions suggested"),
-        (54.9, "Needs substantial work"),
+        (100, "Strong accept"),
+        (85, "Strong accept"),
+        (84.9, "Accept"),
+        (70, "Accept"),
+        (69.9, "Weak accept"),
+        (55, "Weak accept"),
+        (54.9, "Weak reject"),
+        (45, "Weak reject"),
+        (44.9, "Reject"),
+        (25, "Reject"),
+        (24.9, "Strong reject"),
+        (0, "Strong reject"),
     ],
 )
 def test_decision_boundaries(score, expected):

@@ -220,7 +220,7 @@ export default function VenueSettings({
                 id="venue-name"
                 value={value.name}
                 maxLength={160}
-                placeholder="e.g. NeurIPS 2026"
+                placeholder="e.g. ICLR 2026"
                 onChange={(e) => update("name", e.target.value)}
               />
             </div>
@@ -233,7 +233,7 @@ export default function VenueSettings({
                 type="url"
                 value={value.website}
                 maxLength={2000}
-                placeholder="https://venue.org/reviewer-guidelines"
+                placeholder="https://openreview.net/group?id=ICLR.cc/2026/Conference"
                 onChange={(e) => update("website", e.target.value)}
               />
             </div>

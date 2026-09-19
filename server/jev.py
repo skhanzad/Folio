@@ -8,6 +8,7 @@ import httpx
 
 from .models import Dimension, Paper, Section, SectionResult, VenueContext
 from .pdf import chunks
+from .prediction import METADATA_SECTION, clean_scoring_text
 from .rubric import DIMENSIONS, dimensions_for, questions
 
 ENDPOINT = "https://api.typesafe.ai/v1/systemone"
@@ -104,13 +105,24 @@ class JevClient:
 
     async def review_section(self, paper: Paper, section: Section, profile: str) -> SectionResult:
         started = time.perf_counter()
-        passages = chunks(section.text)
+        scoring_text = clean_scoring_text(section.text)
+        passages = chunks(
+            scoring_text
+            if scoring_text.strip()
+            else "No scientific text remains after excluding publication-status metadata."
+        )
         abstract = next((s.text for s in paper.sections if s.role == "abstract"), "")
         # The context is deliberately bounded; the complete target text is always reviewed.
         context = {
-            "title": paper.title,
-            "abstract_excerpt": abstract[:1800],
-            "section_headings": [s.title for s in paper.sections],
+            "title": "Manuscript title withheld for acceptance assessment"
+            if self.venue and self.venue.openreview_id
+            else paper.title,
+            "abstract_excerpt": clean_scoring_text(abstract)
+            .encode("utf-8")[:1800]
+            .decode("utf-8", errors="ignore"),
+            "section_headings": [
+                s.title[:110] for s in paper.sections if not METADATA_SECTION.search(s.title)
+            ],
         }
         answers = []
         models = []

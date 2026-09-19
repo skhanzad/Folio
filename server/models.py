@@ -23,6 +23,7 @@ class VenueContext(BaseModel):
     track: str = ""
     sources: list[VenueSource]
     warnings: list[str] = Field(default_factory=list)
+    openreview_id: str = ""
 
 
 class Section(BaseModel):
@@ -93,3 +94,4 @@ class ReviewReport(BaseModel):
     input_tokens: int = 0
     output_tokens: int = 0
     venue: VenueContext | None = None
+    prediction: dict | None = None

@@ -2,7 +2,7 @@
 
 A thoughtful paper reviewer built with **Jev**, FastAPI, and React. Upload a PDF and see section scores appear as they are evaluated. Every upload—including the same filename—starts a new review. Replacing an upload cancels pending requests and prevents old results from changing the new review.
 
-![Folio workspace with a target venue](reports/screenshots/venue-setup-desktop.png)
+![Folio with ICLR 2026 training evidence](reports/screenshots/iclr2026-setup-desktop.png)
 
 ## Run locally
 
@@ -50,7 +50,7 @@ Open **http://127.0.0.1:8000**. The included commands bind to loopback and are i
 
 ## Ground a review in a venue
 
-**NeurIPS 2026** is selected by default, using the official [reviewer guidelines](https://neurips.cc/Conferences/2026/ReviewerGuidelines) and the General category. Change **Target venue** to **Custom conference or journal** to enter another venue's name, edition, official website or guidelines URL, and optional track. General research reviews remain available. Your chosen venue stays selected when you start another review in the same session.
+**ICLR 2026** is selected by default, using its [OpenReview venue group](https://openreview.net/group?id=ICLR.cc/2026/Conference) and official [reviewer guide](https://iclr.cc/Conferences/2026/ReviewerGuide). The NeurIPS preset remains available. OpenReview group URLs resolve through public group metadata to the venue website; the ICLR preset selects its scientific reviewer guide. Change **Target venue** to **Custom conference or journal** to enter another venue's name, edition, official website or guidelines URL, and optional track. General research reviews remain available. Your chosen venue stays selected when you start another review in the same session.
 
 **Preview venue guidance** shows the selected website passages and their source links before uploading. Each upload independently retrieves current guidance, then supplies those passages to Jev for every section and criterion. **Venue fit** contributes 20% of the score; the four core dimensions contribute 80%. These are Folio's weights, not the venue's official scoring scale or acceptance odds. On a completed review, **Change target venue → Review for this venue** assesses the same PDF again. History retains the venue and sources actually used for each saved review.
 
@@ -62,37 +62,92 @@ Jev is a structured decision model, not a generative reviewer. It evaluates five
 
 The section score is `0.20 × clarity + 0.35 × rigor + 0.30 × evidence + 0.15 × completeness`. Overall section weights are grouped by role; a role's weight is divided among its sections by word count. Multiple subsections therefore do not receive extra influence merely because they are split apart. The complete rubric and thresholds are available in the interface and in `server/rubric.py`.
 
-With venue grounding, the section score is `0.16 × clarity + 0.28 × rigor + 0.24 × evidence + 0.12 × completeness + 0.20 × venue fit`. The website context informs all five judgments. The role aggregation, provisional scoring, confidence check, and recommendation thresholds remain the same. Rubric version `folio-1.1` records this addition; the original general-review study below used `folio-1.0`.
+With venue grounding, the section score is `0.16 × clarity + 0.28 × rigor + 0.24 × evidence + 0.12 × completeness + 0.20 × venue fit`. The website context informs all five judgments. The role aggregation, provisional scoring, confidence check, and recommendation thresholds remain the same. The current rubric version is `folio-2.0`. Earlier general and NeurIPS integration studies used `folio-1.0` and `folio-1.1`, respectively.
 
-| Overall score | Recommendation              |
-| ------------- | --------------------------- |
-| 85–100        | Strong submission           |
-| 70–<85        | Promising · minor revisions |
-| 55–<70        | Major revisions suggested   |
-| <55           | Needs substantial work      |
+| Manuscript rubric score | Rubric recommendation |
+| ----------------------- | --------------------- |
+| 85–100                  | Strong accept         |
+| 70–<85                  | Accept                |
+| 55–<70                  | Weak accept           |
+| 45–<55                  | Weak reject           |
+| 25–<45                  | Reject                |
+| <25                     | Strong reject         |
 
-Mean model confidence below 45% changes the recommendation to **Expert review needed**. Incomplete or failed reviews never receive a final recommendation. Confidence measures concentration of the returned distribution, not scientific correctness. Thresholds and weights have not been calibrated against expert reviews.
+These rubric labels describe an application score. The separately trained ICLR acceptance estimate uses the probability bands below. Mean Jev confidence below 45% flags the assessment for expert review without inventing a seventh outcome. Incomplete or failed reviews receive no final recommendation or acceptance estimate. Jev confidence describes concentration of its output distribution, not acceptance probability or scientific correctness.
 
-Limits: 20 MB, 120 pages, 400,000 extracted characters, and 64 review units. Long sections are evaluated in non-overlapping passages of at most 9,000 UTF-8 bytes; every extracted character is included. The title, section outline, and an explicitly bounded abstract excerpt provide context. Passage scores are weighted by character count.
+Limits: 20 MB, 120 pages, 400,000 extracted characters, and 64 review units. Long sections are evaluated in non-overlapping passages of at most 9,000 UTF-8 bytes; all non-status passage text is evaluated. Explicit publication-status and anonymous-author lines are removed from model inputs. An explicitly bounded abstract and scientific outline provide context; OpenReview manuscript titles are withheld, and acknowledgement headings are excluded from that outline. Passage scores are weighted by character count.
 
 Scanned PDFs require OCR before upload. The text pipeline does not verify references, novelty, figure content, numerical results, or mathematical proofs. Headings and column order remain heuristic. Inspect the extracted manuscript for unusual layouts. Portable LaTeX exports transliterate non-ASCII text; the JSON export preserves exact Unicode.
 
+## ICLR 2026 acceptance pilot
+
+**A real supervised classifier is trained on Jev's numerical outputs. Jev itself is not fine-tuned.** The authorized 200-PDF pilot produced 191 usable papers: 114 training, 38 calibration, and 39 held-out test papers. The dataset contains 89 accepted and 102 rejected manuscripts. The classifier uses the mean and spread of five Jev criteria across scientific sections, for ten features. Reviewer scores, human reviews, decisions, identifiers, filenames, and publication-status metadata are excluded from prediction features.
+
+A standardized logistic regression is selected by five-fold cross-validation on the training split only, followed by sigmoid calibration on the separate calibration split. The test split is untouched by model selection. The trained parameters ship as inspectable JSON in [artifacts/iclr2026-model.json](artifacts/iclr2026-model.json).
+
+| Held-out metric               | Jev classifier | Training-prevalence baseline |
+| ----------------------------- | -------------: | ---------------------------: |
+| Accuracy                      |          61.5% |                        53.8% |
+| Balanced accuracy             |          59.5% |                        50.0% |
+| AUROC                         |          0.598 |                        0.500 |
+| Brier error (lower is better) |          0.240 |                        0.249 |
+
+**Predictive evidence is weak.** The AUROC 95% bootstrap interval is 0.405–0.778 and includes chance ranking. At a 0.50 threshold, the classifier misses 12 of the 18 accepted test papers. The point estimates do not establish reliable superiority or future-submission accuracy.
+
+The final view returns a binary Accept/Reject prediction and one of six outcomes:
+
+| Estimated acceptance probability | Outcome       |
+| -------------------------------- | ------------- |
+| 0–<15%                           | Strong reject |
+| 15–<30%                          | Reject        |
+| 30–<50%                          | Weak reject   |
+| 50–<70%                          | Weak accept   |
+| 70–<85%                          | Accept        |
+| 85–100%                          | Strong accept |
+
+These are display bands, not six observed ground-truth classes or an official ICLR scale. In this pilot, all held-out estimates fall between 31.2% and 61.7%; the four stronger bands were not reached. A known training paper is visibly identified as non-independent. Changing the venue, profile, Jev version, rubric, or selected guidance invalidates this model's acceptance estimate; section reviews remain available. The other venues require their own labeled studies before empirical acceptance prediction is available.
+
+### Where the ground truth came from
+
+Direct OpenReview note and PDF requests returned HTTP 403 challenges. We downloaded original OpenReview PDFs from the public [weathon/iclr_2026 mirror](https://huggingface.co/datasets/weathon/iclr_2026/tree/7a02654128d0ecb559ae5ef9b670dcaa564ad199), then required final decisions to agree with a separately pinned [Paper Copilot snapshot](https://github.com/papercopilot/paperlists/tree/875df9d6550849ec07c9c6feba24986be2dd4551). These are corroborating archives; authoritative decision notes were not directly re-fetched in this environment. Each PDF is checked against its pinned SHA-256. Withdrawals, desk rejections, conditional outcomes, disputes, and missing labels are excluded.
+
+Of 393 mirrored PDFs, 313 met the metadata and size criteria. A stratified sample of 200 yielded 191 after nine extraction failures. **88 of 89 accepted PDFs contain a publication header.** Explicit headers are stripped before scoring, but post-acceptance revision content can still leak outcome information. This is a selected, retrospective archive, not a representative sample of submission-time manuscripts. Unknown Jev pretraining overlap is another limitation. Final decisions are organizational outcomes, not scientific truth or section-quality labels.
+
+The welcome screen exposes the counts, baseline, and source revisions. Its evidence browser filters accepted, rejected, and held-out papers and links to the OpenReview forum and downloadable mirrored PDF. Download the complete [study manifest and predictions](reports/iclr2026-study.json), [numeric features](reports/iclr2026-features.json), or read the [LaTeX findings](reports/iclr2026-findings.tex) / [compiled PDF](reports/iclr2026-findings.pdf).
+
+### Reproduce training
+
+```bash
+# Downloads at most 200 PDFs, verifies labels/hashes, and freezes the splits.
+uv run python scripts/train_openreview.py --stage prepare --limit 200
+# Uses the configured Jev key; completed papers are cached for resumability.
+uv run python scripts/train_openreview.py --stage score
+# Fits and evaluates from cached scores; does not call Jev.
+uv run python scripts/train_openreview.py --stage fit
+uv run --with matplotlib python scripts/plot_openreview.py
+npm run report:iclr
+```
+
+The initial run evaluated 3,782 sections in 4,370 passage requests, with 18,037,875 input tokens and 327,750 output tokens. Raw PDFs, parsed text, pinned source snapshots, and detailed scores live under the ignored `data/openreview/iclr2026/` directory. Keep that directory to refit without paying for scoring again. `--data-dir` can isolate a new study; incompatible cached model/rubric/guidance versions are rejected. Optional `FOLIO_ACCEPTANCE_MODEL` selects another compatible JSON artifact.
+
+Two further live uploads of one already-scored held-out paper completed in 2.16 and 1.83 seconds, produced fresh review IDs/source timestamps, and returned Weak reject estimates of 42.3% and 42.5%. These are integration observations, not additional independent accuracy samples. See [live measurements](reports/iclr2026-live-validation.json).
+
 ## Data handling
 
-The server sends extracted text to `https://api.typesafe.ai/v1/systemone`. Folio does not persist uploaded manuscripts or completed reports on the server. Framework upload buffering can create temporary files, which are closed after reading. Browser memory retains completed reviews and their files until reload, with a maximum history of 20. No localStorage or third-party analytics is used; fonts are bundled locally. TypeSafe's handling of API data is governed by its own [policies](https://docs.typesafe.ai/legal).
+The server sends extracted text to `https://api.typesafe.ai/v1/systemone`. Ordinary web uploads do not persist manuscripts or completed reports on the server. The explicitly run research CLI persists its downloaded corpus and scores locally. Framework upload buffering can create temporary files, which are closed after reading. Browser memory retains completed reviews and their files until reload, with a maximum history of 20. No localStorage or third-party analytics is used; fonts are bundled locally. TypeSafe's handling of API data is governed by its own [policies](https://docs.typesafe.ai/legal).
 
 For venue reviews, the server also reads the supplied website and sends selected public passages to Jev. Website requests include no manuscript, API credential, or browser cookies. Connections are pinned to validated public IP addresses, with same-site redirect checks, a 2 MB page limit, and a 35-second retrieval deadline. No venue-response cache is used.
 
 The checked-in example and study artifacts were deliberately generated by the benchmark script; ordinary uploads do not create these artifacts. The configured secret `.env` is ignored by Git.
 
-## Validation and findings
+## Engineering validation and earlier integration studies
 
-- **72 backend tests**: PDF parsing, scoring, cancellation, exports, plus venue-source retrieval, public-address restrictions, track selection, source provenance, five-question Jev requests, venue weighting, retrieval failures, and fresh sources on repeated uploads.
-- **24 browser tests** across desktop and mobile: real-time streams, uploads, stale responses, exports, history, rubric inspection, venue selection, source previews, venue changes, retrieval errors, and automated accessibility checks.
-- **Nine live API reviews**: three repetitions each for a structured synthetic manuscript, a deliberately vague variant, and _On Calibration of Modern Neural Networks_ (Guo et al., 2017).
-- **Two live venue reviews**: repeated uploads of the structured synthetic manuscript using NeurIPS 2026 guidance. Both completed all eight sections with five criteria, scoring 77.4/100; venue-fit scores were 65.2 and 65.9. Total latencies including website retrieval were 1.49 s and 1.14 s. These are integration observations, not scientific-validity measurements.
+- **114 backend tests**: PDF parsing, scoring, cancellation, exports, plus venue-source retrieval, public-address restrictions, track selection, source provenance, five-question Jev requests, venue weighting, retrieval failures, and fresh sources on repeated uploads.
+- **30 browser tests** across desktop and mobile: real-time streams, uploads, stale responses, exports, history, rubric inspection, venue selection, source previews, venue changes, retrieval errors, and automated accessibility checks.
+- **Nine earlier live API reviews (`folio-1.0`)**: three repetitions each for a structured synthetic manuscript, a deliberately vague variant, and _On Calibration of Modern Neural Networks_ (Guo et al., 2017).
+- **Two earlier live venue reviews (`folio-1.1`)**: repeated uploads of the structured synthetic manuscript using NeurIPS 2026 guidance. Both completed all eight sections with five criteria, scoring 77.4/100; venue-fit scores were 65.2 and 65.9. Total latencies including website retrieval were 1.49 s and 1.14 s. These are integration observations, not scientific-validity measurements.
 
-The measured mean full-review latencies were 0.71 s, 0.66 s, and 1.24 s respectively. Corresponding scores were 80.7, 20.5, and 68.8. **The synthetic manuscript outscored the published paper; these numbers are not a validated ranking of scientific merit.** This small study establishes integration behavior, response times in this environment, and sensitivity to a controlled writing change. It does not establish peer-review accuracy or human agreement.
+In those earlier general-review experiments, the measured mean full-review latencies were 0.71 s, 0.66 s, and 1.24 s respectively. Corresponding scores were 80.7, 20.5, and 68.8. **The synthetic manuscript outscored the published paper; these numbers are not a validated ranking of scientific merit.** This small study establishes integration behavior, response times in this environment, and sensitivity to a controlled writing change. It does not establish peer-review accuracy or human agreement.
 
 See [the LaTeX findings](reports/findings.tex), [compiled report](reports/findings.pdf), and [raw measurements](reports/benchmark-results.json). An actual [example review](reports/example-review.tex) and its [compiled PDF](reports/example-review.pdf) are also included.
 
@@ -127,8 +182,10 @@ server/rubric.py        Questions, section weighting, recommendation policy
 server/venue.py         Venue guidance retrieval, passage selection, provenance
 server/app.py           Upload, stream, health, rubric, and export endpoints
 server/export.py        Escaped, portable LaTeX report generation
+server/prediction.py    Calibrated acceptance inference and compatibility checks
+artifacts/              Trained, inspectable ICLR 2026 model parameters
 tests/                  Backend tests and desktop/mobile browser scenarios
-scripts/                Reproducible live integration study and figure generation
+scripts/                OpenReview download/training, studies, and figure generation
 reports/                Findings, measurements, example review, screenshots
 ```
 

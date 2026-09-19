@@ -11,7 +11,7 @@ import ipaddress
 import re
 import socket
 from datetime import UTC, datetime
-from urllib.parse import urljoin, urlsplit, urlunsplit
+from urllib.parse import parse_qs, urljoin, urlsplit, urlunsplit
 
 import httpx
 from bs4 import BeautifulSoup
@@ -23,6 +23,11 @@ SOURCE_BYTES = 2400
 MAX_SOURCES = 3
 PRESETS = [
     {
+        "name": "ICLR 2026",
+        "website": "https://openreview.net/group?id=ICLR.cc/2026/Conference",
+        "track": "Main conference",
+    },
+    {
         "name": "NeurIPS 2026",
         "website": "https://neurips.cc/Conferences/2026/ReviewerGuidelines",
         "track": "General",
@@ -30,7 +35,8 @@ PRESETS = [
 ]
 SIGNALS = re.compile(
     r"\b(scope|topics?|research|review(?:ing|er)?|criteria|contributions?|originality|novelty|significance|"
-    r"clarity|quality|soundness|rigou?r|evidence|reproducib\w*|methodology|ethics|limitations?|"
+    r"clarity|quality|soundness|rigou?r(?:ous)?|evidence|reproducib\w*|methodology|ethics|limitations?|"
+    r"claims?|knowledge|impact|motivat\w*|technically|"
     r"machine learning|artificial intelligence)\b",
     re.IGNORECASE,
 )
@@ -163,20 +169,35 @@ def read_guidance(html: str, url: str, track: str = "") -> tuple[VenueSource, li
     seen = set()
     heading = ""
     category = ""
-    track_words = [w for w in re.findall(r"[a-z]+", track.lower()) if len(w) > 3]
+    excluded_level = None
+    track_words = [
+        w
+        for w in re.findall(r"[a-z]+", track.lower())
+        if len(w) > 3 and w not in {"main", "conference", "track", "paper", "papers", "research"}
+    ]
     matching_categories = {
         h.get_text(" ", strip=True)
-        for h in root.find_all(["h1", "h2"])
+        for h in root.find_all("h2")
         if track_words and any(word in h.get_text(" ", strip=True).lower() for word in track_words)
     }
     for element in root.find_all(["h1", "h2", "h3", "h4", "p", "li"]):
         text = re.sub(r"\s+", " ", element.get_text(" ", strip=True))
+        if element.name.startswith("h"):
+            level = int(element.name[1])
+            if excluded_level is not None and level <= excluded_level:
+                excluded_level = None
+            if re.search(r"review examples?|sample reviews?", text, re.IGNORECASE):
+                excluded_level = level
+        if excluded_level is not None:
+            continue
         if element.name in ("h1", "h2"):
             category = text
         if element.name.startswith("h"):
             heading = text
             continue
         if len(text.split()) < 12 or text in seen:
+            continue
+        if element.name == "li" and element.find("li"):
             continue
         if matching_categories and category not in matching_categories:
             continue
@@ -187,6 +208,12 @@ def read_guidance(html: str, url: str, track: str = "") -> tuple[VenueSource, li
         if hits < 2:
             continue
         rank = hits + 4 * len(PRIORITY.findall(heading))
+        if re.search(
+            r"reviewing (?:a|the) (?:submission|paper)|evaluation criteria|review(?:ing)? (?:criteria|guidelines)|research scope",
+            category,
+            re.IGNORECASE,
+        ):
+            rank += 30
         if track_words and any(word in f"{category} {heading}".lower() for word in track_words):
             rank += 30
         candidates.append((rank, len(candidates), passage))
@@ -216,7 +243,7 @@ def read_guidance(html: str, url: str, track: str = "") -> tuple[VenueSource, li
         rank = sum(
             weight
             for pattern, weight in [
-                (r"review(?:er|ing)?[\s/_-]*(?:guidelines|criteria|instructions)", 10),
+                (r"review(?:er|ing)?[\s/_-]*(?:guidelines|guides?|criteria|instructions)", 10),
                 (r"call[\s/_-]*for[\s/_-]*papers|callforpapers", 8),
                 (r"aims.{0,8}scope|scope|research.{0,5}topics", 7),
                 (r"author[\s/_-]*guidelines", 4),
@@ -242,19 +269,47 @@ def read_guidance(html: str, url: str, track: str = "") -> tuple[VenueSource, li
 
 async def load_venue(request: VenueRequest) -> VenueContext:
     website = normalize_url(request.website)
+    openreview_id = ""
+    guidance_url = website
+    if site_host(website) == "openreview.net":
+        parsed = urlsplit(website)
+        openreview_id = parse_qs(parsed.query).get("id", [""])[0]
+        if parsed.path != "/group" or not re.fullmatch(
+            r"[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+){2,8}", openreview_id
+        ):
+            raise VenueError(
+                "Use an OpenReview venue group URL, such as https://openreview.net/group?id=ICLR.cc/2026/Conference."
+            )
+        try:
+            async with httpx.AsyncClient(timeout=12, trust_env=False) as client:
+                response = await client.get(
+                    "https://api2.openreview.net/groups", params={"id": openreview_id}
+                )
+                response.raise_for_status()
+                group = response.json()["groups"][0]
+            official = normalize_url(group["content"]["website"]["value"])
+        except (httpx.HTTPError, KeyError, IndexError, ValueError) as exc:
+            raise VenueError(
+                "This OpenReview venue could not be resolved. Use its official reviewer-guidelines website or retry later."
+            ) from exc
+        guidance_url = (
+            "https://iclr.cc/Conferences/2026/ReviewerGuide"
+            if openreview_id == "ICLR.cc/2026/Conference"
+            else official
+        )
     name, track = request.name.strip(), request.track.strip()
     if len(name) < 2:
         raise VenueError("Enter the venue name, including its year or edition when relevant.")
     sources, warnings = [], []
     try:
         async with asyncio.timeout(35):
-            final_url, html = await fetch_html(website, site_host(website))
+            final_url, html = await fetch_html(guidance_url, site_host(guidance_url))
             first, links = read_guidance(html, final_url, track)
             if first.passages:
                 sources.append(first)
             for link in links[: MAX_SOURCES - 1]:
                 try:
-                    resolved, content = await fetch_html(link, site_host(website))
+                    resolved, content = await fetch_html(link, site_host(guidance_url))
                     source, _ = read_guidance(content, resolved, track)
                     if source.passages and not any(s.url == source.url for s in sources):
                         sources.append(source)
@@ -271,4 +326,11 @@ async def load_venue(request: VenueRequest) -> VenueContext:
     warnings.append(
         "Grounding uses selected passages from the supplied site, not an exhaustive policy or submission-compliance check."
     )
-    return VenueContext(name=name, website=website, track=track, sources=sources, warnings=warnings)
+    return VenueContext(
+        name=name,
+        website=website,
+        track=track,
+        sources=sources,
+        warnings=warnings,
+        openreview_id=openreview_id,
+    )

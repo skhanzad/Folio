@@ -169,6 +169,55 @@ async def test_unusable_site_never_silently_falls_back(monkeypatch):
         await load_venue(VenueRequest(name="Example 2026", website=URL))
 
 
+async def test_openreview_group_resolves_to_its_official_guidance(monkeypatch):
+    seen = []
+
+    def handler(request):
+        seen.append(request)
+        return httpx.Response(
+            200, json={"groups": [{"content": {"website": {"value": "https://iclr.cc/Conferences/2026"}}}]}
+        )
+
+    mock_website(monkeypatch, handler)
+    fetch = AsyncMock(return_value=("https://iclr.cc/Conferences/2026/ReviewerGuide", GUIDANCE))
+    monkeypatch.setattr("server.venue.fetch_html", fetch)
+    request = VenueRequest(
+        name="ICLR 2026",
+        website="https://openreview.net/group?id=ICLR.cc/2026/Conference",
+        track="Main conference",
+    )
+    result = await load_venue(request)
+    assert str(seen[0].url).startswith("https://api2.openreview.net/groups?")
+    assert seen[0].url.params["id"] == "ICLR.cc/2026/Conference"
+    assert fetch.call_args_list[0].args == ("https://iclr.cc/Conferences/2026/ReviewerGuide", "iclr.cc")
+    assert result.website == request.website
+    assert result.openreview_id == "ICLR.cc/2026/Conference"
+
+
+@pytest.mark.parametrize(
+    "suffix", ["forum?id=paper", "group?id=localhost", "group?id=ICLR.cc/2026/Conference%0A", "group"]
+)
+async def test_openreview_requires_a_valid_venue_group_url(suffix):
+    with pytest.raises(VenueError, match="venue group URL"):
+        await load_venue(VenueRequest(name="ICLR", website="https://openreview.net/" + suffix))
+
+
+def test_scientific_guidance_outranks_reviewer_tasks_and_excludes_sample_reviews(monkeypatch):
+    html = """<main><h1>ICLR 2026 main conference reviewer guide</h1>
+    <h2>Main tasks of a reviewer</h2><p>Reviewers should submit their review on time and check the deadline for research submissions.</p>
+    <h2>Reviewing a submission: step-by-step</h2><p>Assess whether the paper makes a clear research contribution supported by rigorous evidence and sound reasoning.</p>
+    <h2>Sample reviews</h2><h3>Positive example</h3><p>This particular paper makes an outstanding research contribution and deserves acceptance for excellent experimental evidence.</p>
+    <h2>Final considerations</h2><p>Reviewers should consider scientific limitations and make clear which evidence supports the research claims.</p></main>"""
+    source, _ = read_guidance(html, URL, "Main conference")
+    text = " ".join(source.passages)
+    assert "Reviewing a submission: step-by-step" in text
+    assert "particular paper" not in text
+    assert "Final considerations" in text
+    monkeypatch.setattr("server.venue.SOURCE_BYTES", 250)
+    limited, _ = read_guidance(html, URL, "Main conference")
+    assert limited.passages[0].startswith("Reviewing a submission: step-by-step:")
+
+
 async def test_every_passage_receives_cited_venue_context_and_changes_score():
     seen = []
 

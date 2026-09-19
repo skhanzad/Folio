@@ -34,6 +34,7 @@ import {
 } from "lucide-react";
 import { downloadBlob, exportLatex, streamReview } from "./api";
 import VenueSettings, { VenueSources } from "./VenueSettings";
+import AcceptancePanel, { ResearchEvidence } from "./AcceptancePanel";
 import type {
   Dimension,
   Profile,
@@ -298,9 +299,9 @@ export default function App() {
   const [history, setHistory] = useState<Report[]>([]);
   const [profile, setProfile] = useState<Profile>("research");
   const [venue, setVenue] = useState<VenueRequest | null>({
-    name: "NeurIPS 2026",
-    website: "https://neurips.cc/Conferences/2026/ReviewerGuidelines",
-    track: "General",
+    name: "ICLR 2026",
+    website: "https://openreview.net/group?id=ICLR.cc/2026/Conference",
+    track: "Main conference",
   });
   const [selected, setSelected] = useState("");
   const [health, setHealth] = useState<{
@@ -883,6 +884,9 @@ export default function App() {
                       </div>
                     </section>
                   </div>
+                  {venue?.website.includes("ICLR.cc/2026/Conference") && (
+                    <ResearchEvidence />
+                  )}
                   <section className="how-it-works">
                     <div className="section-heading">
                       <h2>A thoughtful review, in three steps.</h2>
@@ -1123,14 +1127,16 @@ export default function App() {
                           </span>
                           <h2>
                             {state.summary?.complete
-                              ? state.summary.decision
+                              ? state.report?.prediction?.status === "ready"
+                                ? "Manuscript rubric"
+                                : state.summary.decision
                               : busy
                                 ? "Reading with care."
                                 : "Review incomplete."}
                           </h2>
                           <p>
                             {state.summary?.complete
-                              ? "An assessment of your manuscript, grounded in an explicit review rubric."
+                              ? "This score summarizes the section rubric. A trained acceptance estimate, when available, is shown separately below."
                               : "The score updates with each reviewed section. The final recommendation appears when all sections are complete."}
                           </p>
                           {state.summary?.confidence != null && (
@@ -1202,6 +1208,9 @@ export default function App() {
                       )}
                     </section>
                   </div>
+                  {state.report?.prediction && (
+                    <AcceptancePanel prediction={state.report.prediction} />
+                  )}
                   <div
                     className={`dimension-cards ${state.venue ? "has-venue" : ""}`}
                   >
@@ -1358,9 +1367,10 @@ export default function App() {
                         <div className="manuscript-heading">
                           <ScanText size={20} />
                           <p>
-                            This is the text used for evaluation. Check the
-                            section boundaries and reading order against your
-                            original PDF.
+                            This is the extracted text. Publication-status lines
+                            are withheld from model inputs. Check the section
+                            boundaries and reading order against your original
+                            PDF.
                           </p>
                         </div>
                         {state.paper.sections.map((section) => (
@@ -1430,8 +1440,9 @@ export default function App() {
                         Scores reflect the extracted text. They do not verify
                         novelty, references, figures, or mathematical
                         correctness. Model confidence is not a probability of
-                        scientific validity. Recommendations use an uncalibrated
-                        rubric and support expert judgment.
+                        scientific validity. Manuscript rubric thresholds are
+                        design choices; acceptance estimates have separate study
+                        limitations.
                       </p>
                       {state.report &&
                         state.summary?.notes
@@ -1495,7 +1506,10 @@ export default function App() {
                         <h2>{report.paper.title}</h2>
                         <p>
                           {report.paper.filename} · {report.results.length}{" "}
-                          sections · {report.summary.decision}
+                          sections ·{" "}
+                          {report.prediction?.status === "ready"
+                            ? report.prediction.label
+                            : report.summary.decision}
                         </p>
                       </div>
                       <ScoreRing value={report.summary.score} small />
@@ -1605,9 +1619,9 @@ export default function App() {
                         <Info size={18} />
                         <p>
                           Below {rubric.confidence_floor * 100}% mean
-                          confidence, the recommendation becomes “Expert review
-                          needed.” Confidence measures model certainty, not
-                          paper correctness.
+                          confidence, the assessment is flagged for expert
+                          review. Confidence measures model certainty, not paper
+                          correctness.
                         </p>
                       </div>
                       <p className="muted">
@@ -1656,7 +1670,7 @@ export default function App() {
         {busy
           ? `${state.results.length} of ${state.paper?.sections.length ?? "unknown"} sections reviewed. ${state.message}`
           : state.status === "complete"
-            ? `Review complete. Overall score ${state.summary?.score}. ${state.summary?.decision}.`
+            ? `Review complete. Rubric score ${state.summary?.score}. ${state.report?.prediction?.status === "ready" ? `Acceptance prediction: ${state.report.prediction.label}.` : state.summary?.decision}`
             : state.message}
       </div>
       {notice && (
