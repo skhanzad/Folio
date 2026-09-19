@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jev-completion"
+version = "0.1.0"
+description = "Measured sentence completion by composing Jev classification decisions"
+requires-python = ">=3.11"
+dependencies = ["httpx==0.28.1", "python-dotenv==1.1.1", "wordfreq==3.1.1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9", "matplotlib>=3.8,<4"]
+
+[project.scripts]
+jev = "jev_completion.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["jev_completion*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
